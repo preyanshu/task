@@ -1,0 +1,8 @@
+name = "timeline-locks"
+category = "games_puzzles_and_interactive_simulation"
+subcategory = "puzzle_solving"
+description = "Solve circular timeline lock puzzles by deriving the exact sweep semantics, including the full-lap endpoint case."
+
+[evaluation]
+solver_path = "solution/solve.py"
+test_command = "bash tests/test.sh"
