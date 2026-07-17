@@ -2,27 +2,27 @@
   "instances": [
     {
       "id": "sample_amber",
-      "initial": "0101",
-      "target": "0010",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}],
-      "chants": [
-        {"name": "iris", "scroll": "abxcdab", "motifs": [{"lock": "A", "pattern": "ab"}, {"lock": "C", "pattern": "xcd"}]},
-        {"name": "jade", "scroll": "tornet", "motifs": [{"lock": "B", "pattern": "to"}, {"lock": "D", "pattern": "net"}]},
-        {"name": "kilo", "scroll": "mistral", "motifs": [{"lock": "A", "pattern": "mi"}, {"lock": "D", "pattern": "al"}]},
-        {"name": "lumen", "scroll": "redblue", "motifs": [{"lock": "B", "pattern": "red"}, {"lock": "C", "pattern": "blue"}]}
+      "initial": "00000",
+      "target": "11100",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
+      "routes": [
+        {"name": "iris", "from": "A", "to": "C"},
+        {"name": "jade", "from": "B", "to": "D"},
+        {"name": "kilo", "from": "D", "to": "E"},
+        {"name": "lumen", "from": "E", "to": "B"}
       ]
     },
     {
       "id": "sample_brass",
-      "initial": "10010",
-      "target": "10110",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
-      "chants": [
-        {"name": "ash", "scroll": "catdogcat", "motifs": [{"lock": "A", "pattern": "cat"}, {"lock": "B", "pattern": "dog"}]},
-        {"name": "bryn", "scroll": "sun-moon", "motifs": [{"lock": "C", "pattern": "sun"}, {"lock": "E", "pattern": "moon"}]},
-        {"name": "cove", "scroll": "riverstone", "motifs": [{"lock": "B", "pattern": "river"}, {"lock": "D", "pattern": "stone"}]},
-        {"name": "dune", "scroll": "northstar", "motifs": [{"lock": "A", "pattern": "north"}, {"lock": "E", "pattern": "star"}]},
-        {"name": "elm", "scroll": "glasswind", "motifs": [{"lock": "C", "pattern": "glass"}, {"lock": "D", "pattern": "wind"}]}
+      "initial": "101010",
+      "target": "000110",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}, {"name": "F"}],
+      "routes": [
+        {"name": "ash", "from": "A", "to": "B"},
+        {"name": "bryn", "from": "C", "to": "E"},
+        {"name": "cove", "from": "B", "to": "D"},
+        {"name": "dune", "from": "E", "to": "F"},
+        {"name": "elm", "from": "F", "to": "B"}
       ]
     }
   ]

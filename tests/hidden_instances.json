@@ -1,35 +1,38 @@
 {
   "instances": [
     {
-      "id": "hidden_lex_a",
-      "initial": "0",
-      "target": "0",
-      "locks": [{"name": "A"}],
-      "chants": [
-        {"name": "Amber", "scroll": "xx", "motifs": [{"lock": "A", "pattern": "x"}]},
-        {"name": "bravo", "scroll": "y", "motifs": [{"lock": "A", "pattern": "y"}]}
+      "id": "hidden_lap_a",
+      "initial": "0000",
+      "target": "0111",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}],
+      "routes": [
+        {"name": "amber", "from": "A", "to": "A"},
+        {"name": "birch", "from": "B", "to": "C"},
+        {"name": "cedar", "from": "C", "to": "D"}
       ]
     },
     {
-      "id": "hidden_lex_b",
-      "initial": "00",
-      "target": "00",
-      "locks": [{"name": "A"}, {"name": "B"}],
-      "chants": [
-        {"name": "Atlas", "scroll": "p", "motifs": [{"lock": "A", "pattern": "p"}]},
-        {"name": "Boreal", "scroll": "q", "motifs": [{"lock": "A", "pattern": "q"}]},
-        {"name": "cinder", "scroll": "r", "motifs": [{"lock": "B", "pattern": "r"}]}
+      "id": "hidden_lap_b",
+      "initial": "00000",
+      "target": "11011",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
+      "routes": [
+        {"name": "agate", "from": "C", "to": "C"},
+        {"name": "basalt", "from": "A", "to": "B"},
+        {"name": "coral", "from": "D", "to": "E"},
+        {"name": "drift", "from": "A", "to": "A"}
       ]
     },
     {
-      "id": "hidden_lex_c",
-      "initial": "10",
-      "target": "10",
-      "locks": [{"name": "A"}, {"name": "B"}],
-      "chants": [
-        {"name": "Aster", "scroll": "m", "motifs": [{"lock": "B", "pattern": "m"}]},
-        {"name": "Cobalt", "scroll": "n", "motifs": [{"lock": "B", "pattern": "n"}]},
-        {"name": "delta", "scroll": "oo", "motifs": [{"lock": "A", "pattern": "o"}]}
+      "id": "hidden_lap_c",
+      "initial": "000000",
+      "target": "111110",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}, {"name": "F"}],
+      "routes": [
+        {"name": "flint", "from": "F", "to": "F"},
+        {"name": "glade", "from": "A", "to": "C"},
+        {"name": "harbor", "from": "D", "to": "E"},
+        {"name": "ivory", "from": "B", "to": "D"}
       ]
     }
   ]

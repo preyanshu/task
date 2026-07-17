@@ -5,21 +5,18 @@ from itertools import combinations
 from pathlib import Path
 
 
-def occurrence_count(scroll, pattern):
-    return sum(
-        1
-        for start in range(len(scroll))
-        if scroll.startswith(pattern, start)
-    )
-
-
-def chant_mask(instance, chant):
+def route_mask(instance, route):
     lock_index = {lock["name"]: i for i, lock in enumerate(instance["locks"])}
-    mask = 0
-    for motif in chant["motifs"]:
-        if occurrence_count(chant["scroll"], motif["pattern"]) % 2 == 1:
-            mask ^= 1 << lock_index[motif["lock"]]
-    return mask
+    n = len(instance["locks"])
+    start = lock_index[route["from"]]
+    stop = lock_index[route["to"]]
+    mask = 1 << start
+    pos = start
+    while True:
+        pos = (pos + 1) % n
+        mask ^= 1 << pos
+        if pos == stop:
+            return mask
 
 
 def state_mask(bits):
@@ -32,14 +29,14 @@ def state_mask(bits):
 
 def apply_subset(instance, chosen):
     mask = state_mask(instance["initial"])
-    chants = {chant["name"]: chant for chant in instance["chants"]}
+    routes = {route["name"]: route for route in instance["routes"]}
     for name in sorted(chosen):
-        mask ^= chant_mask(instance, chants[name])
+        mask ^= route_mask(instance, routes[name])
     return "".join("1" if mask >> i & 1 else "0" for i in range(len(instance["locks"])))
 
 
 def answer_for(instance):
-    names = sorted(chant["name"] for chant in instance["chants"])
+    names = sorted(route["name"] for route in instance["routes"])
     matches = []
     for size in range(len(names) + 1):
         for subset in combinations(names, size):
