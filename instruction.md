@@ -19,9 +19,7 @@ Each tick has two phases:
    flips the bit at that starting position. A marker whose proposed destination is unique
    moves to that destination and flips the bit at that destination.
 
-Only equal proposed destinations cause blocking. A destination is not blocked merely
-because it was occupied at the start of the tick; if that marker proposed somewhere else,
-the destination can still be entered during the same commit phase.
+Only equal proposed destinations cause blocking.
 
 For each input instance, output the final binary state after all ticks.
 
