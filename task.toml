@@ -1,8 +1,18 @@
-name = "timeline-locks"
+version = "1.0"
+
+[metadata]
 category = "games_puzzles_and_interactive_simulation"
 subcategory = "puzzle_solving"
-description = "Solve circular timeline lock puzzles by deriving the exact sweep semantics, including the full-lap endpoint case."
 
-[evaluation]
-solver_path = "solution/solve.py"
-test_command = "bash tests/test.sh"
+[task]
+name = "preyanshu/timeline-locks"
+description = "Solve circular timeline lock puzzles by deriving exact sweep semantics, including the full-lap endpoint case."
+
+[verifier]
+timeout_sec = 900.0
+
+[agent]
+timeout_sec = 900.0
+
+[environment]
+build_timeout_sec = 600.0
