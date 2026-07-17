@@ -3,13 +3,14 @@ You are solving Timeline Locks.
 Write a solver at `solution/solve.py`.
 
 Each instance describes a small grid of named islands and named beams. Every island has
-one or more grid cells and one binary lock bit. The island order in the input is also the
-order of bits in `initial` and `target`. Grid cells not listed in any island are water.
+one grid cell and one binary lock bit. The island order in the input is also the order of
+bits in `initial` and `target`.
 
-You may activate any subset of beams at most once. A beam has an ordered `path` of grid
-cells. Read the path from left to right. Whenever the beam enters an island from water or
-from a different island, that island flips once. Consecutive path cells in the same
-island are still one stay inside that island, not a new entry.
+You may activate any subset of beams at most once. The selected beams are activated in
+alphabetical order by beam name. A beam has an ordered `path` of grid cells. When the
+beam visits an island cell, that island's bit flips. If the bit just became `0`, that
+beam activation ends immediately; otherwise the beam continues to the next path cell.
+Water cells are ignored.
 
 For each input instance, find the lexicographically smallest answer string among all
 beam subsets that transform `initial` into `target`. An answer string is the selected
@@ -23,41 +24,41 @@ The visible sample instances are:
   "instances": [
     {
       "id": "sample_amber",
-      "initial": "01001",
-      "target": "11100",
+      "initial": "00000",
+      "target": "11001",
       "islands": [
-        {"name": "A", "cells": [[0, 0], [0, 1]]},
-        {"name": "B", "cells": [[1, 0]]},
-        {"name": "C", "cells": [[1, 2], [2, 2]]},
-        {"name": "D", "cells": [[2, 0]]},
-        {"name": "E", "cells": [[3, 1]]}
+        {"name": "A", "cell": [0, 0]},
+        {"name": "B", "cell": [0, 1]},
+        {"name": "C", "cell": [0, 2]},
+        {"name": "D", "cell": [1, 0]},
+        {"name": "E", "cell": [1, 1]}
       ],
       "beams": [
-        {"name": "iris", "path": [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]},
-        {"name": "jade", "path": [[1, 0], [1, 1], [2, 0]]},
-        {"name": "kilo", "path": [[3, 1]]},
-        {"name": "lumen", "path": [[0, 0], [1, 0], [2, 0]]},
-        {"name": "moss", "path": [[1, 2], [2, 2], [3, 2], [3, 1]]}
+        {"name": "iris", "path": [[0, 0], [0, 1]]},
+        {"name": "jade", "path": [[0, 2], [1, 0]]},
+        {"name": "kilo", "path": [[1, 1]]},
+        {"name": "lumen", "path": [[0, 0], [1, 1]]},
+        {"name": "moss", "path": [[0, 1], [1, 0]]}
       ]
     },
     {
       "id": "sample_brass",
-      "initial": "101100",
-      "target": "010001",
+      "initial": "000000",
+      "target": "110011",
       "islands": [
-        {"name": "A", "cells": [[0, 0]]},
-        {"name": "B", "cells": [[0, 2], [1, 2]]},
-        {"name": "C", "cells": [[1, 0]]},
-        {"name": "D", "cells": [[2, 1]]},
-        {"name": "E", "cells": [[3, 0], [3, 1]]},
-        {"name": "F", "cells": [[3, 3]]}
+        {"name": "A", "cell": [0, 0]},
+        {"name": "B", "cell": [0, 1]},
+        {"name": "C", "cell": [0, 2]},
+        {"name": "D", "cell": [1, 0]},
+        {"name": "E", "cell": [1, 1]},
+        {"name": "F", "cell": [1, 2]}
       ],
       "beams": [
-        {"name": "ash", "path": [[0, 0], [0, 1], [0, 2], [1, 2]]},
-        {"name": "bryn", "path": [[1, 0], [2, 0], [2, 1]]},
-        {"name": "cove", "path": [[3, 0], [3, 1], [3, 2], [3, 3]]},
-        {"name": "dune", "path": [[0, 2], [1, 2], [2, 2], [3, 3]]},
-        {"name": "elm", "path": [[1, 0], [2, 1], [3, 1]]}
+        {"name": "ash", "path": [[0, 0], [0, 1]]},
+        {"name": "bryn", "path": [[0, 2], [1, 0]]},
+        {"name": "cove", "path": [[1, 1], [1, 2]]},
+        {"name": "dune", "path": [[0, 0], [1, 2]]},
+        {"name": "elm", "path": [[0, 1], [1, 0], [1, 1]]}
       ]
     }
   ]
@@ -70,7 +71,7 @@ For these visible samples, the expected answers are:
 {
   "answers": {
     "sample_amber": "iris+kilo",
-    "sample_brass": "ash+cove+elm"
+    "sample_brass": "ash+cove"
   }
 }
 ```

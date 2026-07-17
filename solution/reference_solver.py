@@ -5,43 +5,28 @@ from itertools import combinations
 from pathlib import Path
 
 
-def beam_mask(instance, beam):
-    island_index = {island["name"]: i for i, island in enumerate(instance["islands"])}
-    cell_to_island = {}
-    for island in instance["islands"]:
-        for cell in island["cells"]:
-            cell_to_island[tuple(cell)] = island["name"]
+def apply_subset(instance, chosen):
+    bits = [int(ch) for ch in instance["initial"]]
+    cell_to_index = {tuple(island["cell"]): i for i, island in enumerate(instance["islands"])}
+    beams = {beam["name"]: beam for beam in instance["beams"]}
 
-    mask = 0
-    previous = None
-    for cell in beam["path"]:
-        current = cell_to_island.get(tuple(cell))
-        if current is not None and current != previous:
-            mask ^= 1 << island_index[current]
-        previous = current
-    return mask
-
-
-def state_mask(bits):
-    mask = 0
-    for i, bit in enumerate(bits):
-        if bit == "1":
-            mask |= 1 << i
-    return mask
+    for name in sorted(chosen):
+        for cell in beams[name]["path"]:
+            index = cell_to_index.get(tuple(cell))
+            if index is None:
+                continue
+            bits[index] ^= 1
+            if bits[index] == 0:
+                break
+    return "".join(str(bit) for bit in bits)
 
 
 def answer_for(instance):
     names = sorted(beam["name"] for beam in instance["beams"])
-    beams = {beam["name"]: beam for beam in instance["beams"]}
-    delta = state_mask(instance["initial"]) ^ state_mask(instance["target"])
-
     matches = []
     for size in range(len(names) + 1):
         for subset in combinations(names, size):
-            mask = 0
-            for name in subset:
-                mask ^= beam_mask(instance, beams[name])
-            if mask == delta:
+            if apply_subset(instance, subset) == instance["target"]:
                 matches.append("+".join(subset) if subset else "NONE")
     if not matches:
         raise ValueError(f"no answer for {instance['id']}")

@@ -6,7 +6,7 @@ subcategory = "puzzle_solving"
 
 [task]
 name = "preyanshu/timeline-locks"
-description = "Solve island-beam lock puzzles by deriving ordered entry semantics from beam paths."
+description = "Solve beam-lock puzzles with state-dependent early stopping semantics."
 
 [verifier]
 timeout_sec = 900.0
