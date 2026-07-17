@@ -20,7 +20,8 @@ alphabetical order by chant name.
 For each input instance, find the lexicographically smallest answer string among all
 chant subsets that transform `initial` into `target`. An answer string is the selected
 chant names sorted alphabetically and joined with `+`, such as `ash+cove`. Use `NONE` for
-the empty subset.
+the empty subset. Chant names are case-sensitive, and answer strings are compared by
+Unicode code point order.
 
 The visible sample instances are:
 

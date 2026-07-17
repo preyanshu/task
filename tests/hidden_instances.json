@@ -1,39 +1,35 @@
 {
   "instances": [
     {
-      "id": "hidden_echo_a",
-      "initial": "000",
-      "target": "010",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}],
+      "id": "hidden_lex_a",
+      "initial": "0",
+      "target": "0",
+      "locks": [{"name": "A"}],
       "chants": [
-        {"name": "alpha", "scroll": "xyzw", "motifs": [{"lock": "A", "pattern": "x"}, {"lock": "A", "pattern": "y"}, {"lock": "B", "pattern": "z"}]},
-        {"name": "bravo", "scroll": "p", "motifs": [{"lock": "A", "pattern": "p"}]},
-        {"name": "coda", "scroll": "q", "motifs": [{"lock": "C", "pattern": "q"}]}
+        {"name": "Amber", "scroll": "xx", "motifs": [{"lock": "A", "pattern": "x"}]},
+        {"name": "bravo", "scroll": "y", "motifs": [{"lock": "A", "pattern": "y"}]}
       ]
     },
     {
-      "id": "hidden_echo_b",
-      "initial": "1010",
-      "target": "0011",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}],
+      "id": "hidden_lex_b",
+      "initial": "00",
+      "target": "00",
+      "locks": [{"name": "A"}, {"name": "B"}],
       "chants": [
-        {"name": "ash", "scroll": "lmno", "motifs": [{"lock": "A", "pattern": "l"}, {"lock": "B", "pattern": "m"}]},
-        {"name": "briar", "scroll": "pqrs", "motifs": [{"lock": "C", "pattern": "p"}, {"lock": "C", "pattern": "q"}, {"lock": "D", "pattern": "r"}]},
-        {"name": "clove", "scroll": "tu", "motifs": [{"lock": "B", "pattern": "t"}]},
-        {"name": "dusk", "scroll": "vw", "motifs": [{"lock": "A", "pattern": "v"}, {"lock": "D", "pattern": "w"}]}
+        {"name": "Atlas", "scroll": "p", "motifs": [{"lock": "A", "pattern": "p"}]},
+        {"name": "Boreal", "scroll": "q", "motifs": [{"lock": "A", "pattern": "q"}]},
+        {"name": "cinder", "scroll": "r", "motifs": [{"lock": "B", "pattern": "r"}]}
       ]
     },
     {
-      "id": "hidden_echo_c",
-      "initial": "00000",
-      "target": "10110",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
+      "id": "hidden_lex_c",
+      "initial": "10",
+      "target": "10",
+      "locks": [{"name": "A"}, {"name": "B"}],
       "chants": [
-        {"name": "agate", "scroll": "abcdef", "motifs": [{"lock": "A", "pattern": "a"}, {"lock": "E", "pattern": "b"}]},
-        {"name": "basin", "scroll": "ghijk", "motifs": [{"lock": "B", "pattern": "g"}, {"lock": "B", "pattern": "h"}, {"lock": "C", "pattern": "i"}]},
-        {"name": "cairn", "scroll": "lmnop", "motifs": [{"lock": "D", "pattern": "l"}]},
-        {"name": "drift", "scroll": "qrstu", "motifs": [{"lock": "E", "pattern": "q"}]},
-        {"name": "ember", "scroll": "vwxyz", "motifs": [{"lock": "A", "pattern": "v"}, {"lock": "A", "pattern": "w"}, {"lock": "D", "pattern": "x"}]}
+        {"name": "Aster", "scroll": "m", "motifs": [{"lock": "B", "pattern": "m"}]},
+        {"name": "Cobalt", "scroll": "n", "motifs": [{"lock": "B", "pattern": "n"}]},
+        {"name": "delta", "scroll": "oo", "motifs": [{"lock": "A", "pattern": "o"}]}
       ]
     }
   ]
