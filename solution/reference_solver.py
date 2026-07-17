@@ -5,13 +5,14 @@ from itertools import combinations
 from pathlib import Path
 
 
-DIAL_ORDER = {ch: i for i, ch in enumerate("zyxwvutsrqponmlkjihgfedcba+")}
+DEFAULT_DIAL = "abcdefghijklmnopqrstuvwxyz+"
 
 
-def dial_key(answer):
+def dial_key(instance, answer):
     if answer == "NONE":
-        return [len(DIAL_ORDER) + 1]
-    return [DIAL_ORDER[ch] for ch in answer]
+        return [len(DEFAULT_DIAL) + 1]
+    order = {ch: i for i, ch in enumerate(instance.get("dial", DEFAULT_DIAL))}
+    return [order[ch] for ch in answer]
 
 
 def apply_subset(instance, chosen):
@@ -39,7 +40,7 @@ def answer_for(instance):
                 matches.append("+".join(subset) if subset else "NONE")
     if not matches:
         raise ValueError(f"no answer for {instance['id']}")
-    return min(matches, key=dial_key)
+    return min(matches, key=lambda answer: dial_key(instance, answer))
 
 
 def main():

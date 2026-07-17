@@ -16,14 +16,14 @@ For each input instance, find the smallest answer string among all beam subsets 
 transform `initial` into `target`. An answer string is the selected beam names sorted
 alphabetically and joined with `+`, such as `ash+cove`. Use `NONE` for the empty subset.
 
-The lock face does not use ordinary alphabetic order when comparing answer strings. Its
-character order is:
+Normally, compare answer strings with this character order:
 
 ```text
-z y x w v u t s r q p o n m l k j i h g f e d c b a +
+a b c d e f g h i j k l m n o p q r s t u v w x y z +
 ```
 
-Compare answer strings lexicographically using that character order.
+Some instances include a `dial` string. When `dial` is present, it gives the character
+order for comparing answer strings in that instance instead of the normal order.
 If `NONE` is a valid answer, treat it as larger than every non-empty answer string.
 
 The visible sample instances are:

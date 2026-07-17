@@ -2,6 +2,7 @@
   "instances": [
     {
       "id": "hidden_early_stop_a",
+      "dial": "zyxwvutsrqponmlkjihgfedcba+",
       "initial": "1110",
       "target": "1010",
       "islands": [
@@ -20,6 +21,7 @@
     },
     {
       "id": "hidden_early_stop_b",
+      "dial": "zyxwvutsrqponmlkjihgfedcba+",
       "initial": "01010",
       "target": "10001",
       "islands": [
@@ -39,6 +41,7 @@
     },
     {
       "id": "hidden_early_stop_c",
+      "dial": "zyxwvutsrqponmlkjihgfedcba+",
       "initial": "00110",
       "target": "10001",
       "islands": [
