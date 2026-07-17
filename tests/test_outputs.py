@@ -68,7 +68,11 @@ def run_solver(path):
         stderr=subprocess.PIPE,
         timeout=10,
     )
-    assert completed.returncode == 0, "solver exited unsuccessfully"
+    assert completed.returncode == 0, (
+        "solver exited unsuccessfully\n"
+        f"stdout:\n{completed.stdout}\n"
+        f"stderr:\n{completed.stderr}"
+    )
     return json.loads(completed.stdout)
 
 
