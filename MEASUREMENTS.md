@@ -33,3 +33,19 @@ Transcript notes:
 - At least two runs also added extra reasoning around lexicographic reconstruction and zero-delta edge cases.
 
 Diagnosis: disqualified as a stump. The "flip" wording was clear enough that agents naturally implemented repeated flips rather than the intended OR shortcut.
+
+## 2026-07-18 02:32 Harbor run: cyclic next-visit full-lap routes
+
+Command:
+
+```bash
+harbor run --agent codex --model gpt-5.4 --path /home/preyanshu/Downloads/fix-task-broken --task timeline-locks -k 4 -n 1 --ae CODEX_AUTH_JSON_PATH="$CODEX_AUTH_JSON_PATH" -y
+```
+
+Result: 4/4 passed, mean reward 1.000, no exceptions.
+
+Transcript notes:
+- Agents implemented route effects by simulation: flip the start, advance clockwise, flip each visited lock, and stop on the endpoint.
+- Multiple runs performed randomized brute-force cross-checks that included equal-endpoint routes, so the hidden full-lap case was handled rather than missed.
+
+Diagnosis: disqualified as a stump. The "next visit after leaving" wording made direct simulation natural enough that the equal-endpoint case did not induce a shortcut failure.
