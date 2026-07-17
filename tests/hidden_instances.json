@@ -2,8 +2,8 @@
   "instances": [
     {
       "id": "hidden_early_stop_a",
-      "initial": "1000",
-      "target": "0001",
+      "initial": "1110",
+      "target": "1010",
       "islands": [
         {"name": "A", "cell": [0, 0]},
         {"name": "B", "cell": [0, 1]},
@@ -11,10 +11,11 @@
         {"name": "D", "cell": [0, 3]}
       ],
       "beams": [
-        {"name": "amber", "path": [[0, 0], [0, 1], [0, 2]]},
-        {"name": "birch", "path": [[0, 3]]},
-        {"name": "cedar", "path": [[0, 1], [0, 3]]},
-        {"name": "dahlia", "path": [[0, 2], [0, 3]]}
+        {"name": "amber", "path": [[0, 1], [0, 1]]},
+        {"name": "birch", "path": [[0, 0]]},
+        {"name": "cedar", "path": [[0, 3], [0, 0]]},
+        {"name": "dahlia", "path": [[0, 1]]},
+        {"name": "ember", "path": [[0, 0]]}
       ]
     },
     {

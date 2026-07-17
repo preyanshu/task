@@ -5,6 +5,15 @@ from itertools import combinations
 from pathlib import Path
 
 
+DIAL_ORDER = {ch: i for i, ch in enumerate("zyxwvutsrqponmlkjihgfedcba+")}
+
+
+def dial_key(answer):
+    if answer == "NONE":
+        return [len(DIAL_ORDER) + 1]
+    return [DIAL_ORDER[ch] for ch in answer]
+
+
 def apply_subset(instance, chosen):
     bits = [int(ch) for ch in instance["initial"]]
     cell_to_index = {tuple(island["cell"]): i for i, island in enumerate(instance["islands"])}
@@ -30,7 +39,7 @@ def answer_for(instance):
                 matches.append("+".join(subset) if subset else "NONE")
     if not matches:
         raise ValueError(f"no answer for {instance['id']}")
-    return min(matches)
+    return min(matches, key=dial_key)
 
 
 def main():

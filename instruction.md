@@ -12,10 +12,19 @@ beam visits an island cell, that island's bit flips. If the bit just became `0`,
 beam activation ends immediately; otherwise the beam continues to the next path cell.
 Water cells are ignored.
 
-For each input instance, find the lexicographically smallest answer string among all
-beam subsets that transform `initial` into `target`. An answer string is the selected
-beam names sorted alphabetically and joined with `+`, such as `ash+cove`. Use `NONE` for
-the empty subset.
+For each input instance, find the smallest answer string among all beam subsets that
+transform `initial` into `target`. An answer string is the selected beam names sorted
+alphabetically and joined with `+`, such as `ash+cove`. Use `NONE` for the empty subset.
+
+The lock face does not use ordinary alphabetic order when comparing answer strings. Its
+character order is:
+
+```text
+z y x w v u t s r q p o n m l k j i h g f e d c b a +
+```
+
+Compare answer strings lexicographically using that character order.
+If `NONE` is a valid answer, treat it as larger than every non-empty answer string.
 
 The visible sample instances are:
 

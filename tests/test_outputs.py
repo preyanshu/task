@@ -8,6 +8,13 @@ from pathlib import Path
 WORKSPACE = Path(os.environ.get("WORKSPACE_DIR", "/workspace"))
 TESTS = Path(os.environ.get("TESTS_DIR", "/tests"))
 SOLVER_PATH = WORKSPACE / "solution" / "solve.py"
+DIAL_ORDER = {ch: i for i, ch in enumerate("zyxwvutsrqponmlkjihgfedcba+")}
+
+
+def dial_key(answer):
+    if answer == "NONE":
+        return [len(DIAL_ORDER) + 1]
+    return [DIAL_ORDER[ch] for ch in answer]
 
 
 def apply_subset(instance, chosen):
@@ -34,7 +41,7 @@ def expected_answer(instance):
             if apply_subset(instance, subset) == instance["target"]:
                 matches.append("+".join(subset) if subset else "NONE")
     assert matches, f"{instance['id']} has no valid answer"
-    return min(matches)
+    return min(matches, key=dial_key)
 
 
 def load_instances(path):
