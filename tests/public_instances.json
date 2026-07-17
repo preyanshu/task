@@ -1,36 +1,42 @@
 {
   "instances": [
     {
-      "id": "sample_copper",
-      "n": 8,
-      "initial": "10111111",
-      "ticks": 5,
-      "tokens": [
-        {"name": "a", "pos": 1, "moves": "SRSLS"},
-        {"name": "b", "pos": 0, "moves": "RSLRS"},
-        {"name": "c", "pos": 7, "moves": "SLLSS"}
+      "id": "sample_amber",
+      "initial": "01001",
+      "target": "11111",
+      "islands": [
+        {"name": "A", "cells": [[0, 0]]},
+        {"name": "B", "cells": [[0, 2]]},
+        {"name": "C", "cells": [[1, 1]]},
+        {"name": "D", "cells": [[2, 0]]},
+        {"name": "E", "cells": [[2, 2]]}
+      ],
+      "beams": [
+        {"name": "iris", "cells": [[0, 0], [1, 1]]},
+        {"name": "jade", "cells": [[0, 2], [2, 2]]},
+        {"name": "kilo", "cells": [[2, 0]]},
+        {"name": "lumen", "cells": [[0, 0], [2, 2]]},
+        {"name": "moss", "cells": [[1, 1], [2, 0]]}
       ]
     },
     {
-      "id": "sample_quartz",
-      "n": 9,
-      "initial": "111101101",
-      "ticks": 5,
-      "tokens": [
-        {"name": "a", "pos": 5, "moves": "SSSSL"},
-        {"name": "b", "pos": 2, "moves": "SSLSR"},
-        {"name": "c", "pos": 6, "moves": "LSSSS"}
-      ]
-    },
-    {
-      "id": "sample_onyx",
-      "n": 10,
-      "initial": "0011111010",
-      "ticks": 6,
-      "tokens": [
-        {"name": "a", "pos": 4, "moves": "SSSSSL"},
-        {"name": "b", "pos": 7, "moves": "LRSRSR"},
-        {"name": "c", "pos": 0, "moves": "SRSLLS"}
+      "id": "sample_brass",
+      "initial": "101100",
+      "target": "001001",
+      "islands": [
+        {"name": "A", "cells": [[0, 1]]},
+        {"name": "B", "cells": [[1, 0]]},
+        {"name": "C", "cells": [[1, 2]]},
+        {"name": "D", "cells": [[2, 1]]},
+        {"name": "E", "cells": [[3, 0]]},
+        {"name": "F", "cells": [[3, 2]]}
+      ],
+      "beams": [
+        {"name": "ash", "cells": [[0, 1], [1, 0]]},
+        {"name": "bryn", "cells": [[1, 2], [2, 1]]},
+        {"name": "cove", "cells": [[3, 0], [3, 2]]},
+        {"name": "dune", "cells": [[0, 1], [3, 2]]},
+        {"name": "elm", "cells": [[1, 0], [2, 1], [3, 0]]}
       ]
     }
   ]

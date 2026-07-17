@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+from itertools import combinations
 from pathlib import Path
 
 
@@ -9,33 +10,42 @@ TESTS = Path(os.environ.get("TESTS_DIR", "/tests"))
 SOLVER_PATH = WORKSPACE / "solution" / "solve.py"
 
 
-def expected_state(instance):
-    n = instance["n"]
-    bits = [int(ch) for ch in instance["initial"]]
-    tokens = [token.copy() for token in instance["tokens"]]
+def beam_mask(instance, beam):
+    island_index = {island["name"]: i for i, island in enumerate(instance["islands"])}
+    cell_to_island = {}
+    for island in instance["islands"]:
+        for cell in island["cells"]:
+            cell_to_island[tuple(cell)] = island["name"]
 
-    for tick in range(instance["ticks"]):
-        proposals = []
-        for token in tokens:
-            move = token["moves"][tick % len(token["moves"])]
-            dest = token["pos"]
-            if move == "L":
-                dest = (dest - 1) % n
-            elif move == "R":
-                dest = (dest + 1) % n
-            elif move != "S":
-                raise AssertionError("invalid move in test data")
-            proposals.append(dest)
+    touched = {cell_to_island[tuple(cell)] for cell in beam["cells"]}
+    mask = 0
+    for name in touched:
+        mask ^= 1 << island_index[name]
+    return mask
 
-        counts = {dest: proposals.count(dest) for dest in set(proposals)}
-        for token, dest in zip(tokens, proposals):
-            if counts[dest] >= 2:
-                bits[token["pos"]] ^= 1
-            else:
-                token["pos"] = dest
-                bits[dest] ^= 1
 
-    return "".join(str(bit) for bit in bits)
+def state_mask(bits):
+    mask = 0
+    for i, bit in enumerate(bits):
+        if bit == "1":
+            mask |= 1 << i
+    return mask
+
+
+def expected_answer(instance):
+    names = sorted(beam["name"] for beam in instance["beams"])
+    beams = {beam["name"]: beam for beam in instance["beams"]}
+    delta = state_mask(instance["initial"]) ^ state_mask(instance["target"])
+    matches = []
+    for size in range(len(names) + 1):
+        for subset in combinations(names, size):
+            mask = 0
+            for name in subset:
+                mask ^= beam_mask(instance, beams[name])
+            if mask == delta:
+                matches.append("+".join(subset) if subset else "NONE")
+    assert matches, f"{instance['id']} has no valid answer"
+    return min(matches)
 
 
 def load_instances(path):
@@ -62,7 +72,7 @@ def check_file(path):
     answers = submitted.get("answers")
     assert isinstance(answers, dict), "answer file must contain an answers object"
 
-    expected = {case["id"]: expected_state(case) for case in load_instances(path)}
+    expected = {case["id"]: expected_answer(case) for case in load_instances(path)}
     assert set(answers) == set(expected), "answer ids do not match required ids"
 
     wrong = [case_id for case_id, value in expected.items() if answers.get(case_id) != value]

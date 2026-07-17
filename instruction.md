@@ -2,27 +2,18 @@ You are solving Timeline Locks.
 
 Write a solver at `solution/solve.py`.
 
-Each instance describes a circular timeline with positions numbered `0` through `n - 1`.
-The state is a binary string of length `n`. Several named markers stand on positions of
-the timeline. Every marker also has a cyclic `moves` string made of `L`, `R`, and `S`.
+Each instance describes a small grid of named islands and named beams. Every island has
+one or more grid cells and one binary lock bit. The island order in the input is also the
+order of bits in `initial` and `target`.
 
-Simulate exactly `ticks` ticks. A marker reads its `moves` string from left to right, one
-character per tick, and after its last character it continues again from the first
-character.
+You may activate any subset of beams at most once. When a beam is activated, look at the
+set of islands that contain at least one cell listed by that beam. Each island in that
+set flips its lock bit exactly once for that beam.
 
-Each tick has two phases:
-
-1. Proposal phase: using only marker positions from the start of this tick, every marker
-   proposes a destination. `L` means one position counter-clockwise, `R` means one
-   position clockwise, and `S` means the marker's current position.
-2. Commit phase: group proposals by destination. A marker whose proposed destination was
-   proposed by two or more markers is blocked: it stays where it started the tick and
-   flips the bit at that starting position. A marker whose proposed destination is unique
-   moves to that destination and flips the bit at that destination.
-
-Only equal proposed destinations cause blocking.
-
-For each input instance, output the final binary state after all ticks.
+For each input instance, find the lexicographically smallest answer string among all
+beam subsets that transform `initial` into `target`. An answer string is the selected
+beam names sorted alphabetically and joined with `+`, such as `ash+cove`. Use `NONE` for
+the empty subset.
 
 The visible sample instances are:
 
@@ -30,36 +21,42 @@ The visible sample instances are:
 {
   "instances": [
     {
-      "id": "sample_copper",
-      "n": 8,
-      "initial": "10111111",
-      "ticks": 5,
-      "tokens": [
-        {"name": "a", "pos": 1, "moves": "SRSLS"},
-        {"name": "b", "pos": 0, "moves": "RSLRS"},
-        {"name": "c", "pos": 7, "moves": "SLLSS"}
+      "id": "sample_amber",
+      "initial": "01001",
+      "target": "11111",
+      "islands": [
+        {"name": "A", "cells": [[0, 0]]},
+        {"name": "B", "cells": [[0, 2]]},
+        {"name": "C", "cells": [[1, 1]]},
+        {"name": "D", "cells": [[2, 0]]},
+        {"name": "E", "cells": [[2, 2]]}
+      ],
+      "beams": [
+        {"name": "iris", "cells": [[0, 0], [1, 1]]},
+        {"name": "jade", "cells": [[0, 2], [2, 2]]},
+        {"name": "kilo", "cells": [[2, 0]]},
+        {"name": "lumen", "cells": [[0, 0], [2, 2]]},
+        {"name": "moss", "cells": [[1, 1], [2, 0]]}
       ]
     },
     {
-      "id": "sample_quartz",
-      "n": 9,
-      "initial": "111101101",
-      "ticks": 5,
-      "tokens": [
-        {"name": "a", "pos": 5, "moves": "SSSSL"},
-        {"name": "b", "pos": 2, "moves": "SSLSR"},
-        {"name": "c", "pos": 6, "moves": "LSSSS"}
-      ]
-    },
-    {
-      "id": "sample_onyx",
-      "n": 10,
-      "initial": "0011111010",
-      "ticks": 6,
-      "tokens": [
-        {"name": "a", "pos": 4, "moves": "SSSSSL"},
-        {"name": "b", "pos": 7, "moves": "LRSRSR"},
-        {"name": "c", "pos": 0, "moves": "SRSLLS"}
+      "id": "sample_brass",
+      "initial": "101100",
+      "target": "001001",
+      "islands": [
+        {"name": "A", "cells": [[0, 1]]},
+        {"name": "B", "cells": [[1, 0]]},
+        {"name": "C", "cells": [[1, 2]]},
+        {"name": "D", "cells": [[2, 1]]},
+        {"name": "E", "cells": [[3, 0]]},
+        {"name": "F", "cells": [[3, 2]]}
+      ],
+      "beams": [
+        {"name": "ash", "cells": [[0, 1], [1, 0]]},
+        {"name": "bryn", "cells": [[1, 2], [2, 1]]},
+        {"name": "cove", "cells": [[3, 0], [3, 2]]},
+        {"name": "dune", "cells": [[0, 1], [3, 2]]},
+        {"name": "elm", "cells": [[1, 0], [2, 1], [3, 0]]}
       ]
     }
   ]
@@ -71,9 +68,8 @@ For these visible samples, the expected answers are:
 ```json
 {
   "answers": {
-    "sample_copper": "11111001",
-    "sample_quartz": "110111001",
-    "sample_onyx": "0010010000"
+    "sample_amber": "iris+kilo",
+    "sample_brass": "ash+cove+elm"
   }
 }
 ```
@@ -89,7 +85,7 @@ It must print JSON to stdout with exactly this shape:
 ```json
 {
   "answers": {
-    "sample_copper": "11111001"
+    "sample_amber": "iris+kilo"
   }
 }
 ```
