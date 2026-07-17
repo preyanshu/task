@@ -3,30 +3,27 @@ You are solving Timeline Locks.
 Write a solver at `solution/solve.py`.
 
 Each instance describes a circular timeline with positions numbered `0` through `n - 1`.
-The state is a binary string of length `n`. You may activate any subset of the named keys
-at most once.
+The state is a binary string of length `n`. Several named markers stand on positions of
+the timeline. Every marker also has a `moves` string made of `L`, `R`, and `S`.
 
-When a key is activated, it performs one clockwise sweep:
+Simulate exactly `ticks` ticks. On tick `t`, marker `m` uses
+`m["moves"][t % len(m["moves"])]`.
 
-1. Put the marker on the key's `start` position.
-2. Flip the bit under the marker.
-3. Move the marker one position clockwise, wrapping from `n - 1` to `0`.
-4. If the marker is now on the key's `stop` position, the sweep is finished and the
-   `stop` position is not flipped by that move.
-5. Otherwise, repeat from step 2.
+Each tick has two phases:
 
-The order of activated keys does not matter because every operation is a bit flip.
+1. Proposal phase: using only marker positions from the start of this tick, every marker
+   proposes a destination. `L` means one position counter-clockwise, `R` means one
+   position clockwise, and `S` means the marker's current position.
+2. Commit phase: group proposals by destination. A marker whose proposed destination was
+   proposed by two or more markers is blocked: it stays where it started the tick and
+   flips the bit at that starting position. A marker whose proposed destination is unique
+   moves to that destination and flips the bit at that destination.
 
-For each instance, your solver must find the lexicographically smallest answer string
-among all subsets that transform `initial` into `target`. An answer string is the selected
-key names sorted alphabetically and joined with `+`, such as `amber+jade`. Use `NONE` for
-the empty subset.
+Only equal proposed destinations cause blocking. A destination is not blocked merely
+because it was occupied at the start of the tick; if that marker proposed somewhere else,
+the destination can still be entered during the same commit phase.
 
-Your solver is run as:
-
-```bash
-python3 solution/solve.py path/to/instances.json
-```
+For each input instance, output the final binary state after all ticks.
 
 The visible sample instances are:
 
@@ -34,58 +31,66 @@ The visible sample instances are:
 {
   "instances": [
     {
-      "id": "sample_alpha",
+      "id": "sample_copper",
       "n": 8,
-      "initial": "00110110",
-      "target": "11000101",
-      "keys": [
-        {"name": "amber", "start": 1, "stop": 4},
-        {"name": "cobalt", "start": 5, "stop": 0},
-        {"name": "ember", "start": 2, "stop": 7},
-        {"name": "jade", "start": 6, "stop": 1},
-        {"name": "opal", "start": 0, "stop": 3}
+      "initial": "10111111",
+      "ticks": 5,
+      "tokens": [
+        {"name": "a", "pos": 1, "moves": "SRSLS"},
+        {"name": "b", "pos": 0, "moves": "RSLRS"},
+        {"name": "c", "pos": 7, "moves": "SLLSS"}
       ]
     },
     {
-      "id": "sample_beta",
+      "id": "sample_quartz",
       "n": 9,
-      "initial": "110010011",
-      "target": "000110010",
-      "keys": [
-        {"name": "birch", "start": 0, "stop": 5},
-        {"name": "cedar", "start": 4, "stop": 8},
-        {"name": "dune", "start": 7, "stop": 2},
-        {"name": "iris", "start": 1, "stop": 6},
-        {"name": "moss", "start": 3, "stop": 7},
-        {"name": "rune", "start": 8, "stop": 4}
+      "initial": "111101101",
+      "ticks": 5,
+      "tokens": [
+        {"name": "a", "pos": 5, "moves": "SSSSL"},
+        {"name": "b", "pos": 2, "moves": "SSLSR"},
+        {"name": "c", "pos": 6, "moves": "LSSSS"}
       ]
     },
     {
-      "id": "sample_gamma",
+      "id": "sample_onyx",
       "n": 10,
-      "initial": "0101110010",
-      "target": "1001111111",
-      "keys": [
-        {"name": "atlas", "start": 9, "stop": 3},
-        {"name": "brass", "start": 2, "stop": 6},
-        {"name": "coral", "start": 5, "stop": 9},
-        {"name": "drift", "start": 1, "stop": 4},
-        {"name": "flint", "start": 6, "stop": 0},
-        {"name": "lumen", "start": 3, "stop": 8}
+      "initial": "0011111010",
+      "ticks": 6,
+      "tokens": [
+        {"name": "a", "pos": 4, "moves": "SSSSSL"},
+        {"name": "b", "pos": 7, "moves": "LRSRSR"},
+        {"name": "c", "pos": 0, "moves": "SRSLLS"}
       ]
     }
   ]
 }
 ```
 
-Your solver may be tested on additional instances with the same schema. It must print JSON
-to stdout with exactly this shape:
+For these visible samples, the expected answers are:
 
 ```json
 {
   "answers": {
-    "sample_alpha": "amber+jade",
-    "sample_beta": "cedar+dune+moss"
+    "sample_copper": "11111001",
+    "sample_quartz": "110111001",
+    "sample_onyx": "0010010000"
+  }
+}
+```
+
+Your solver is run as:
+
+```bash
+python3 solution/solve.py path/to/instances.json
+```
+
+It must print JSON to stdout with exactly this shape:
+
+```json
+{
+  "answers": {
+    "sample_copper": "11111001"
   }
 }
 ```

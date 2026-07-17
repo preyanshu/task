@@ -6,7 +6,7 @@ subcategory = "puzzle_solving"
 
 [task]
 name = "preyanshu/timeline-locks"
-description = "Solve circular timeline lock puzzles by deriving exact sweep semantics, including the full-lap endpoint case."
+description = "Solve circular timeline lock simulations by deriving simultaneous proposal and vacancy semantics."
 
 [verifier]
 timeout_sec = 900.0
