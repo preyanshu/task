@@ -2,41 +2,27 @@
   "instances": [
     {
       "id": "sample_amber",
-      "initial": "00000",
-      "target": "11001",
-      "islands": [
-        {"name": "A", "cell": [0, 0]},
-        {"name": "B", "cell": [0, 1]},
-        {"name": "C", "cell": [0, 2]},
-        {"name": "D", "cell": [1, 0]},
-        {"name": "E", "cell": [1, 1]}
-      ],
-      "beams": [
-        {"name": "iris", "path": [[0, 0], [0, 1]]},
-        {"name": "jade", "path": [[0, 2], [1, 0]]},
-        {"name": "kilo", "path": [[1, 1]]},
-        {"name": "lumen", "path": [[0, 0], [1, 1]]},
-        {"name": "moss", "path": [[0, 1], [1, 0]]}
+      "initial": "0101",
+      "target": "0010",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}],
+      "chants": [
+        {"name": "iris", "scroll": "abxcdab", "motifs": [{"lock": "A", "pattern": "ab"}, {"lock": "C", "pattern": "xcd"}]},
+        {"name": "jade", "scroll": "tornet", "motifs": [{"lock": "B", "pattern": "to"}, {"lock": "D", "pattern": "net"}]},
+        {"name": "kilo", "scroll": "mistral", "motifs": [{"lock": "A", "pattern": "mi"}, {"lock": "D", "pattern": "al"}]},
+        {"name": "lumen", "scroll": "redblue", "motifs": [{"lock": "B", "pattern": "red"}, {"lock": "C", "pattern": "blue"}]}
       ]
     },
     {
       "id": "sample_brass",
-      "initial": "000000",
-      "target": "110011",
-      "islands": [
-        {"name": "A", "cell": [0, 0]},
-        {"name": "B", "cell": [0, 1]},
-        {"name": "C", "cell": [0, 2]},
-        {"name": "D", "cell": [1, 0]},
-        {"name": "E", "cell": [1, 1]},
-        {"name": "F", "cell": [1, 2]}
-      ],
-      "beams": [
-        {"name": "ash", "path": [[0, 0], [0, 1]]},
-        {"name": "bryn", "path": [[0, 2], [1, 0]]},
-        {"name": "cove", "path": [[1, 1], [1, 2]]},
-        {"name": "dune", "path": [[0, 0], [1, 2]]},
-        {"name": "elm", "path": [[0, 1], [1, 0], [1, 1]]}
+      "initial": "10010",
+      "target": "10110",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
+      "chants": [
+        {"name": "ash", "scroll": "catdogcat", "motifs": [{"lock": "A", "pattern": "cat"}, {"lock": "B", "pattern": "dog"}]},
+        {"name": "bryn", "scroll": "sun-moon", "motifs": [{"lock": "C", "pattern": "sun"}, {"lock": "E", "pattern": "moon"}]},
+        {"name": "cove", "scroll": "riverstone", "motifs": [{"lock": "B", "pattern": "river"}, {"lock": "D", "pattern": "stone"}]},
+        {"name": "dune", "scroll": "northstar", "motifs": [{"lock": "A", "pattern": "north"}, {"lock": "E", "pattern": "star"}]},
+        {"name": "elm", "scroll": "glasswind", "motifs": [{"lock": "C", "pattern": "glass"}, {"lock": "D", "pattern": "wind"}]}
       ]
     }
   ]

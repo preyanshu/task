@@ -2,24 +2,22 @@ You are solving Timeline Locks.
 
 Write a solver at `solution/solve.py`.
 
-Each instance describes a small grid of named islands and named beams. Every island has
-one grid cell and one binary lock bit. The island order in the input is also the order of
-bits in `initial` and `target`.
+Each instance has named lock bits and named chants. The lock order in the input is also
+the order of bits in `initial` and `target`.
 
-You may activate any subset of beams at most once. The selected beams are activated in
-alphabetical order by beam name. A beam has an ordered `path` of grid cells. When the
-beam visits an island cell, that island's bit flips. If the bit just became `0`, that
-beam activation ends immediately; otherwise the beam continues to the next path cell.
-Water cells are ignored.
+Each chant has a `scroll` string and a list of motifs. A motif names one lock and one
+pattern string. When a chant is activated, count how many times each motif pattern occurs
+in that chant's scroll. Count by starting position: if the same pattern starts at several
+positions, every start position counts. If a motif's count is odd, flip its named lock
+once; if the count is even, do not flip that lock for that motif.
 
-For each input instance, find the smallest answer string among all beam subsets that
-transform `initial` into `target`. An answer string is the selected beam names sorted
-alphabetically and joined with `+`, such as `ash+cove`. Use `NONE` for the empty subset.
+You may activate any subset of chants at most once. The selected chants are activated in
+alphabetical order by chant name.
 
-Answer strings are compared character by character. The default character order is
-`abcdefghijklmnopqrstuvwxyz+`; an instance may include `dial`, which is the character
-order for that instance. If `NONE` is a valid answer, treat it as larger than every
-non-empty answer string.
+For each input instance, find the lexicographically smallest answer string among all
+chant subsets that transform `initial` into `target`. An answer string is the selected
+chant names sorted alphabetically and joined with `+`, such as `ash+cove`. Use `NONE` for
+the empty subset.
 
 The visible sample instances are:
 
@@ -28,44 +26,41 @@ The visible sample instances are:
   "instances": [
     {
       "id": "sample_amber",
-      "initial": "00000",
-      "target": "11001",
-      "islands": [
-        {"name": "A", "cell": [0, 0]},
-        {"name": "B", "cell": [0, 1]},
-        {"name": "C", "cell": [0, 2]},
-        {"name": "D", "cell": [1, 0]},
-        {"name": "E", "cell": [1, 1]}
-      ],
-      "beams": [
-        {"name": "iris", "path": [[0, 0], [0, 1]]},
-        {"name": "jade", "path": [[0, 2], [1, 0]]},
-        {"name": "kilo", "path": [[1, 1]]},
-        {"name": "lumen", "path": [[0, 0], [1, 1]]},
-        {"name": "moss", "path": [[0, 1], [1, 0]]}
+      "initial": "0101",
+      "target": "0010",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}],
+      "chants": [
+        {"name": "iris", "scroll": "abxcdab", "motifs": [{"lock": "A", "pattern": "ab"}, {"lock": "C", "pattern": "xcd"}]},
+        {"name": "jade", "scroll": "tornet", "motifs": [{"lock": "B", "pattern": "to"}, {"lock": "D", "pattern": "net"}]},
+        {"name": "kilo", "scroll": "mistral", "motifs": [{"lock": "A", "pattern": "mi"}, {"lock": "D", "pattern": "al"}]},
+        {"name": "lumen", "scroll": "redblue", "motifs": [{"lock": "B", "pattern": "red"}, {"lock": "C", "pattern": "blue"}]}
       ]
     },
     {
       "id": "sample_brass",
-      "initial": "000000",
-      "target": "110011",
-      "islands": [
-        {"name": "A", "cell": [0, 0]},
-        {"name": "B", "cell": [0, 1]},
-        {"name": "C", "cell": [0, 2]},
-        {"name": "D", "cell": [1, 0]},
-        {"name": "E", "cell": [1, 1]},
-        {"name": "F", "cell": [1, 2]}
-      ],
-      "beams": [
-        {"name": "ash", "path": [[0, 0], [0, 1]]},
-        {"name": "bryn", "path": [[0, 2], [1, 0]]},
-        {"name": "cove", "path": [[1, 1], [1, 2]]},
-        {"name": "dune", "path": [[0, 0], [1, 2]]},
-        {"name": "elm", "path": [[0, 1], [1, 0], [1, 1]]}
+      "initial": "10010",
+      "target": "10110",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
+      "chants": [
+        {"name": "ash", "scroll": "catdogcat", "motifs": [{"lock": "A", "pattern": "cat"}, {"lock": "B", "pattern": "dog"}]},
+        {"name": "bryn", "scroll": "sun-moon", "motifs": [{"lock": "C", "pattern": "sun"}, {"lock": "E", "pattern": "moon"}]},
+        {"name": "cove", "scroll": "riverstone", "motifs": [{"lock": "B", "pattern": "river"}, {"lock": "D", "pattern": "stone"}]},
+        {"name": "dune", "scroll": "northstar", "motifs": [{"lock": "A", "pattern": "north"}, {"lock": "E", "pattern": "star"}]},
+        {"name": "elm", "scroll": "glasswind", "motifs": [{"lock": "C", "pattern": "glass"}, {"lock": "D", "pattern": "wind"}]}
       ]
     }
   ]
+}
+```
+
+For these visible samples, the expected answers are:
+
+```json
+{
+  "answers": {
+    "sample_amber": "iris+jade",
+    "sample_brass": "ash+cove+elm"
+  }
 }
 ```
 
@@ -80,7 +75,7 @@ It must print JSON to stdout with exactly this shape:
 ```json
 {
   "answers": {
-    "sample_amber": "iris+kilo"
+    "sample_amber": "iris+jade"
   }
 }
 ```

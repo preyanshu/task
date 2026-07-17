@@ -8,41 +8,50 @@ from pathlib import Path
 WORKSPACE = Path(os.environ.get("WORKSPACE_DIR", "/workspace"))
 TESTS = Path(os.environ.get("TESTS_DIR", "/tests"))
 SOLVER_PATH = WORKSPACE / "solution" / "solve.py"
-DEFAULT_DIAL = "abcdefghijklmnopqrstuvwxyz+"
 
 
-def dial_key(instance, answer):
-    if answer == "NONE":
-        return [len(DEFAULT_DIAL) + 1]
-    order = {ch: i for i, ch in enumerate(instance.get("dial", DEFAULT_DIAL))}
-    return [order[ch] for ch in answer]
+def occurrence_count(scroll, pattern):
+    return sum(
+        1
+        for start in range(0, len(scroll) - len(pattern) + 1)
+        if scroll[start : start + len(pattern)] == pattern
+    )
+
+
+def chant_mask(instance, chant):
+    lock_index = {lock["name"]: i for i, lock in enumerate(instance["locks"])}
+    mask = 0
+    for motif in chant["motifs"]:
+        if occurrence_count(chant["scroll"], motif["pattern"]) % 2 == 1:
+            mask ^= 1 << lock_index[motif["lock"]]
+    return mask
+
+
+def state_mask(bits):
+    mask = 0
+    for i, bit in enumerate(bits):
+        if bit == "1":
+            mask |= 1 << i
+    return mask
 
 
 def apply_subset(instance, chosen):
-    bits = [int(ch) for ch in instance["initial"]]
-    cell_to_index = {tuple(island["cell"]): i for i, island in enumerate(instance["islands"])}
-    beams = {beam["name"]: beam for beam in instance["beams"]}
-
+    mask = state_mask(instance["initial"])
+    chants = {chant["name"]: chant for chant in instance["chants"]}
     for name in sorted(chosen):
-        for cell in beams[name]["path"]:
-            index = cell_to_index.get(tuple(cell))
-            if index is None:
-                continue
-            bits[index] ^= 1
-            if bits[index] == 0:
-                break
-    return "".join(str(bit) for bit in bits)
+        mask ^= chant_mask(instance, chants[name])
+    return "".join("1" if mask >> i & 1 else "0" for i in range(len(instance["locks"])))
 
 
 def expected_answer(instance):
-    names = sorted(beam["name"] for beam in instance["beams"])
+    names = sorted(chant["name"] for chant in instance["chants"])
     matches = []
     for size in range(len(names) + 1):
         for subset in combinations(names, size):
             if apply_subset(instance, subset) == instance["target"]:
                 matches.append("+".join(subset) if subset else "NONE")
     assert matches, f"{instance['id']} has no valid answer"
-    return min(matches, key=lambda answer: dial_key(instance, answer))
+    return min(matches)
 
 
 def load_instances(path):
@@ -59,11 +68,7 @@ def run_solver(path):
         stderr=subprocess.PIPE,
         timeout=10,
     )
-    assert completed.returncode == 0, (
-        "solver exited unsuccessfully\n"
-        f"stdout:\n{completed.stdout}\n"
-        f"stderr:\n{completed.stderr}"
-    )
+    assert completed.returncode == 0, "solver exited unsuccessfully"
     return json.loads(completed.stdout)
 
 

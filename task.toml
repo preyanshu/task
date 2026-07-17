@@ -6,7 +6,7 @@ subcategory = "puzzle_solving"
 
 [task]
 name = "preyanshu/timeline-locks"
-description = "Solve beam-lock puzzles with state-dependent early stopping semantics."
+description = "Solve motif-count lock puzzles where overlapping pattern occurrences affect parity."
 
 [verifier]
 timeout_sec = 900.0
