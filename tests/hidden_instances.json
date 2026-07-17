@@ -1,39 +1,38 @@
 {
   "instances": [
     {
-      "id": "hidden_cycle_gate",
+      "id": "hidden_stay_collision_a",
       "n": 7,
-      "initial": "0101010",
+      "initial": "0101101",
       "ticks": 1,
       "tokens": [
         {"name": "a", "pos": 0, "moves": "R"},
-        {"name": "b", "pos": 1, "moves": "R"},
-        {"name": "c", "pos": 2, "moves": "L"},
-        {"name": "d", "pos": 5, "moves": "S"}
+        {"name": "b", "pos": 1, "moves": "S"},
+        {"name": "c", "pos": 5, "moves": "L"}
       ]
     },
     {
-      "id": "hidden_late_vacancy",
-      "n": 8,
-      "initial": "11100010",
-      "ticks": 3,
+      "id": "hidden_stay_collision_b",
+      "n": 9,
+      "initial": "110010011",
+      "ticks": 4,
       "tokens": [
-        {"name": "a", "pos": 0, "moves": "RSL"},
-        {"name": "b", "pos": 1, "moves": "RLL"},
-        {"name": "c", "pos": 4, "moves": "LSR"},
-        {"name": "d", "pos": 7, "moves": "SSL"}
+        {"name": "a", "pos": 2, "moves": "LSSS"},
+        {"name": "b", "pos": 1, "moves": "SRSL"},
+        {"name": "c", "pos": 4, "moves": "SLLL"},
+        {"name": "d", "pos": 5, "moves": "RRSL"}
       ]
     },
     {
-      "id": "hidden_vacated_chain",
-      "n": 8,
-      "initial": "01110001",
+      "id": "hidden_stay_collision_c",
+      "n": 9,
+      "initial": "001110010",
       "ticks": 3,
       "tokens": [
-        {"name": "a", "pos": 0, "moves": "LRS"},
-        {"name": "b", "pos": 3, "moves": "LLL"},
-        {"name": "c", "pos": 6, "moves": "RRS"},
-        {"name": "d", "pos": 1, "moves": "LLR"}
+        {"name": "a", "pos": 4, "moves": "SRS"},
+        {"name": "b", "pos": 5, "moves": "LSS"},
+        {"name": "c", "pos": 8, "moves": "LLS"},
+        {"name": "d", "pos": 1, "moves": "SSR"}
       ]
     }
   ]
