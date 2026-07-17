@@ -17,7 +17,8 @@ alphabetical order by route name.
 For each input instance, find the lexicographically smallest answer string among all
 route subsets that transform `initial` into `target`. An answer string is the selected
 route names sorted alphabetically and joined with `+`, such as `ash+cove`. Use `NONE`
-for the empty subset.
+for the empty subset. Route names are case-sensitive, and answer strings are compared
+by Unicode code point order.
 
 The visible sample instances are:
 

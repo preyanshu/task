@@ -1,38 +1,35 @@
 {
   "instances": [
     {
-      "id": "hidden_lap_a",
-      "initial": "0000",
-      "target": "0111",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}],
+      "id": "hidden_lex_route_a",
+      "initial": "0",
+      "target": "0",
+      "locks": [{"name": "A"}],
       "routes": [
-        {"name": "amber", "from": "A", "to": "A"},
-        {"name": "birch", "from": "B", "to": "C"},
-        {"name": "cedar", "from": "C", "to": "D"}
+        {"name": "Amber", "from": "A", "to": "A"},
+        {"name": "bravo", "from": "A", "to": "A"}
       ]
     },
     {
-      "id": "hidden_lap_b",
-      "initial": "00000",
-      "target": "11011",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
+      "id": "hidden_lex_route_b",
+      "initial": "00",
+      "target": "00",
+      "locks": [{"name": "A"}, {"name": "B"}],
       "routes": [
-        {"name": "agate", "from": "C", "to": "C"},
-        {"name": "basalt", "from": "A", "to": "B"},
-        {"name": "coral", "from": "D", "to": "E"},
-        {"name": "drift", "from": "A", "to": "A"}
+        {"name": "Atlas", "from": "A", "to": "B"},
+        {"name": "Boreal", "from": "A", "to": "B"},
+        {"name": "cedar", "from": "B", "to": "A"}
       ]
     },
     {
-      "id": "hidden_lap_c",
-      "initial": "000000",
-      "target": "111110",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}, {"name": "F"}],
+      "id": "hidden_lex_route_c",
+      "initial": "010",
+      "target": "010",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}],
       "routes": [
-        {"name": "flint", "from": "F", "to": "F"},
-        {"name": "glade", "from": "A", "to": "C"},
-        {"name": "harbor", "from": "D", "to": "E"},
-        {"name": "ivory", "from": "B", "to": "D"}
+        {"name": "Aster", "from": "A", "to": "C"},
+        {"name": "Cobalt", "from": "A", "to": "C"},
+        {"name": "delta", "from": "B", "to": "B"}
       ]
     }
   ]
