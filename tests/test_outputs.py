@@ -11,10 +11,11 @@ SOLVER_PATH = WORKSPACE / "solution" / "solve.py"
 
 
 def occurrence_count(scroll, pattern):
+    alternatives = pattern if isinstance(pattern, list) else [pattern]
     return sum(
         1
-        for start in range(0, len(scroll) - len(pattern) + 1)
-        if scroll[start : start + len(pattern)] == pattern
+        for start in range(len(scroll))
+        if any(scroll.startswith(alternative, start) for alternative in alternatives)
     )
 
 
