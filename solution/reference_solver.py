@@ -6,11 +6,10 @@ from pathlib import Path
 
 
 def occurrence_count(scroll, pattern):
-    alternatives = pattern if isinstance(pattern, list) else [pattern]
     return sum(
         1
         for start in range(len(scroll))
-        if any(scroll.startswith(alternative, start) for alternative in alternatives)
+        if scroll.startswith(pattern, start)
     )
 
 

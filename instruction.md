@@ -6,14 +6,13 @@ Each instance has named lock bits and named chants. The lock order in the input 
 the order of bits in `initial` and `target`.
 
 Each chant has a `scroll` string and a list of motifs. A motif names one lock and a
-`pattern`. Usually `pattern` is a string. It may also be a list of alternative strings.
+string `pattern`.
 
 When a chant is activated, count how many starting positions in the chant's scroll match
-each motif. For a string pattern, a start position matches when that pattern starts there.
-For a list pattern, a start position matches when at least one alternative in the list
-starts there. Count by starting position: if the same motif matches at several positions,
-every start position counts. If a motif's count is odd, flip its named lock once; if the
-count is even, do not flip that lock for that motif.
+each motif. A start position matches a motif when that motif's pattern starts there.
+Count by starting position: if the same motif matches at several positions, every start
+position counts. Work through the motif list for the chant; if a motif's count is odd,
+flip its named lock once, and if the count is even, do not flip that lock for that motif.
 
 You may activate any subset of chants at most once. The selected chants are activated in
 alphabetical order by chant name.

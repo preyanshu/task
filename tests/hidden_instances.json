@@ -1,41 +1,39 @@
 {
   "instances": [
     {
-      "id": "hidden_overlap_a",
-      "initial": "0000",
-      "target": "1000",
+      "id": "hidden_echo_a",
+      "initial": "000",
+      "target": "010",
+      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}],
+      "chants": [
+        {"name": "alpha", "scroll": "xyzw", "motifs": [{"lock": "A", "pattern": "x"}, {"lock": "A", "pattern": "y"}, {"lock": "B", "pattern": "z"}]},
+        {"name": "bravo", "scroll": "p", "motifs": [{"lock": "A", "pattern": "p"}]},
+        {"name": "coda", "scroll": "q", "motifs": [{"lock": "C", "pattern": "q"}]}
+      ]
+    },
+    {
+      "id": "hidden_echo_b",
+      "initial": "1010",
+      "target": "0011",
       "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}],
       "chants": [
-        {"name": "amber", "scroll": "aaaa", "motifs": [{"lock": "A", "pattern": ["aa"]}, {"lock": "B", "pattern": ["aaa"]}]},
-        {"name": "birch", "scroll": "babab", "motifs": [{"lock": "C", "pattern": ["bab"]}]},
-        {"name": "cedar", "scroll": "cccc", "motifs": [{"lock": "D", "pattern": ["cc"]}]},
-        {"name": "dahlia", "scroll": "xyzxyz", "motifs": [{"lock": "A", "pattern": ["xyz"]}]}
+        {"name": "ash", "scroll": "lmno", "motifs": [{"lock": "A", "pattern": "l"}, {"lock": "B", "pattern": "m"}]},
+        {"name": "briar", "scroll": "pqrs", "motifs": [{"lock": "C", "pattern": "p"}, {"lock": "C", "pattern": "q"}, {"lock": "D", "pattern": "r"}]},
+        {"name": "clove", "scroll": "tu", "motifs": [{"lock": "B", "pattern": "t"}]},
+        {"name": "dusk", "scroll": "vw", "motifs": [{"lock": "A", "pattern": "v"}, {"lock": "D", "pattern": "w"}]}
       ]
     },
     {
-      "id": "hidden_overlap_b",
-      "initial": "10100",
-      "target": "00100",
+      "id": "hidden_echo_c",
+      "initial": "00000",
+      "target": "10110",
       "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
       "chants": [
-        {"name": "agate", "scroll": "zzzzz", "motifs": [{"lock": "D", "pattern": ["zz"]}, {"lock": "B", "pattern": ["zzz"]}]},
-        {"name": "basalt", "scroll": "zzzzz", "motifs": [{"lock": "E", "pattern": ["zz"]}, {"lock": "D", "pattern": ["zzz"]}]},
-        {"name": "coral", "scroll": "zzzzz", "motifs": [{"lock": "B", "pattern": ["zz"]}, {"lock": "E", "pattern": ["zzz"]}]},
-        {"name": "drift", "scroll": "zzzzz", "motifs": [{"lock": "A", "pattern": ["zz"]}, {"lock": "B", "pattern": ["zzz"]}]},
-        {"name": "ember", "scroll": "anana", "motifs": [{"lock": "E", "pattern": ["ana"]}, {"lock": "A", "pattern": ["nan"]}]}
-      ]
-    },
-    {
-      "id": "hidden_overlap_c",
-      "initial": "01101",
-      "target": "11101",
-      "locks": [{"name": "A"}, {"name": "B"}, {"name": "C"}, {"name": "D"}, {"name": "E"}],
-      "chants": [
-        {"name": "flint", "scroll": "abababa", "motifs": [{"lock": "A", "pattern": ["aba"]}, {"lock": "B", "pattern": ["bab"]}]},
-        {"name": "glade", "scroll": "xxxxx", "motifs": [{"lock": "C", "pattern": ["xx"]}]},
-        {"name": "harbor", "scroll": "levellevel", "motifs": [{"lock": "D", "pattern": ["level"]}]},
-        {"name": "ivory", "scroll": "popop", "motifs": [{"lock": "E", "pattern": ["pop"]}]},
-        {"name": "juniper", "scroll": "mnmnm", "motifs": [{"lock": "A", "pattern": ["mnm"]}]}
+        {"name": "agate", "scroll": "abcdef", "motifs": [{"lock": "A", "pattern": "a"}, {"lock": "E", "pattern": "b"}]},
+        {"name": "basin", "scroll": "ghijk", "motifs": [{"lock": "B", "pattern": "g"}, {"lock": "B", "pattern": "h"}, {"lock": "C", "pattern": "i"}]},
+        {"name": "cairn", "scroll": "lmnop", "motifs": [{"lock": "D", "pattern": "l"}]},
+        {"name": "drift", "scroll": "qrstu", "motifs": [{"lock": "E", "pattern": "q"}]},
+        {"name": "ember", "scroll": "vwxyz", "motifs": [{"lock": "A", "pattern": "v"}, {"lock": "A", "pattern": "w"}, {"lock": "D", "pattern": "x"}]}
       ]
     }
   ]
