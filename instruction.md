@@ -4,10 +4,11 @@ Write a solver at `solution/solve.py`.
 
 Each instance describes a circular timeline with positions numbered `0` through `n - 1`.
 The state is a binary string of length `n`. Several named markers stand on positions of
-the timeline. Every marker also has a `moves` string made of `L`, `R`, and `S`.
+the timeline. Every marker also has a cyclic `moves` string made of `L`, `R`, and `S`.
 
-Simulate exactly `ticks` ticks. On tick `t`, marker `m` uses
-`m["moves"][t % len(m["moves"])]`.
+Simulate exactly `ticks` ticks. A marker reads its `moves` string from left to right, one
+character per tick, and after its last character it continues again from the first
+character.
 
 Each tick has two phases:
 
