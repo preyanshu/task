@@ -16,15 +16,10 @@ For each input instance, find the smallest answer string among all beam subsets 
 transform `initial` into `target`. An answer string is the selected beam names sorted
 alphabetically and joined with `+`, such as `ash+cove`. Use `NONE` for the empty subset.
 
-Normally, compare answer strings with this character order:
-
-```text
-a b c d e f g h i j k l m n o p q r s t u v w x y z +
-```
-
-Some instances include a `dial` string. When `dial` is present, it gives the character
-order for comparing answer strings in that instance instead of the normal order.
-If `NONE` is a valid answer, treat it as larger than every non-empty answer string.
+Answer strings are compared character by character. The default character order is
+`abcdefghijklmnopqrstuvwxyz+`; an instance may include `dial`, which is the character
+order for that instance. If `NONE` is a valid answer, treat it as larger than every
+non-empty answer string.
 
 The visible sample instances are:
 
@@ -71,17 +66,6 @@ The visible sample instances are:
       ]
     }
   ]
-}
-```
-
-For these visible samples, the expected answers are:
-
-```json
-{
-  "answers": {
-    "sample_amber": "iris+kilo",
-    "sample_brass": "ash+cove"
-  }
 }
 ```
 
