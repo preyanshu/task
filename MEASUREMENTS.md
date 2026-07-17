@@ -49,3 +49,20 @@ Transcript notes:
 - Multiple runs performed randomized brute-force cross-checks that included equal-endpoint routes, so the hidden full-lap case was handled rather than missed.
 
 Diagnosis: disqualified as a stump. The "next visit after leaving" wording made direct simulation natural enough that the equal-endpoint case did not induce a shortcut failure.
+
+## 2026-07-18 02:48 Harbor run: route lexicographic `NONE` sentinel edge
+
+Command:
+
+```bash
+harbor run --agent codex --model gpt-5.4 --path /home/preyanshu/Downloads/fix-task-broken --task timeline-locks -k 4 -n 1 --ae CODEX_AUTH_JSON_PATH="$CODEX_AUTH_JSON_PATH" -y
+```
+
+Result: 4/4 passed, mean reward 1.000, no exceptions.
+
+Transcript notes:
+- `timeline-locks__7BGJsr8` initially found a mismatch where `initial == target` and a zero-effect uppercase route beat `NONE`, then fixed the root selection before submitting.
+- `timeline-locks__NK9WDFZ` explicitly added a `NONE`-vs-nonempty lex check and a same-endpoint route check in its synthetic tests.
+- Later runs also used randomized brute-force cross-checks including wraparound, `from == to`, uppercase names, and `NONE` ordering.
+
+Diagnosis: disqualified as a stump. This produced the desired notice-and-fix pattern, but not a shipped hidden failure.
