@@ -3,40 +3,40 @@
     {
       "id": "sample_amber",
       "initial": "01001",
-      "target": "11111",
+      "target": "11100",
       "islands": [
-        {"name": "A", "cells": [[0, 0]]},
-        {"name": "B", "cells": [[0, 2]]},
-        {"name": "C", "cells": [[1, 1]]},
+        {"name": "A", "cells": [[0, 0], [0, 1]]},
+        {"name": "B", "cells": [[1, 0]]},
+        {"name": "C", "cells": [[1, 2], [2, 2]]},
         {"name": "D", "cells": [[2, 0]]},
-        {"name": "E", "cells": [[2, 2]]}
+        {"name": "E", "cells": [[3, 1]]}
       ],
       "beams": [
-        {"name": "iris", "cells": [[0, 0], [1, 1]]},
-        {"name": "jade", "cells": [[0, 2], [2, 2]]},
-        {"name": "kilo", "cells": [[2, 0]]},
-        {"name": "lumen", "cells": [[0, 0], [2, 2]]},
-        {"name": "moss", "cells": [[1, 1], [2, 0]]}
+        {"name": "iris", "path": [[0, 0], [0, 1], [0, 2], [1, 2], [2, 2]]},
+        {"name": "jade", "path": [[1, 0], [1, 1], [2, 0]]},
+        {"name": "kilo", "path": [[3, 1]]},
+        {"name": "lumen", "path": [[0, 0], [1, 0], [2, 0]]},
+        {"name": "moss", "path": [[1, 2], [2, 2], [3, 2], [3, 1]]}
       ]
     },
     {
       "id": "sample_brass",
       "initial": "101100",
-      "target": "001001",
+      "target": "010001",
       "islands": [
-        {"name": "A", "cells": [[0, 1]]},
-        {"name": "B", "cells": [[1, 0]]},
-        {"name": "C", "cells": [[1, 2]]},
+        {"name": "A", "cells": [[0, 0]]},
+        {"name": "B", "cells": [[0, 2], [1, 2]]},
+        {"name": "C", "cells": [[1, 0]]},
         {"name": "D", "cells": [[2, 1]]},
-        {"name": "E", "cells": [[3, 0]]},
-        {"name": "F", "cells": [[3, 2]]}
+        {"name": "E", "cells": [[3, 0], [3, 1]]},
+        {"name": "F", "cells": [[3, 3]]}
       ],
       "beams": [
-        {"name": "ash", "cells": [[0, 1], [1, 0]]},
-        {"name": "bryn", "cells": [[1, 2], [2, 1]]},
-        {"name": "cove", "cells": [[3, 0], [3, 2]]},
-        {"name": "dune", "cells": [[0, 1], [3, 2]]},
-        {"name": "elm", "cells": [[1, 0], [2, 1], [3, 0]]}
+        {"name": "ash", "path": [[0, 0], [0, 1], [0, 2], [1, 2]]},
+        {"name": "bryn", "path": [[1, 0], [2, 0], [2, 1]]},
+        {"name": "cove", "path": [[3, 0], [3, 1], [3, 2], [3, 3]]},
+        {"name": "dune", "path": [[0, 2], [1, 2], [2, 2], [3, 3]]},
+        {"name": "elm", "path": [[1, 0], [2, 1], [3, 1]]}
       ]
     }
   ]

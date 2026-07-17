@@ -6,7 +6,7 @@ subcategory = "puzzle_solving"
 
 [task]
 name = "preyanshu/timeline-locks"
-description = "Solve island-beam lock puzzles by deriving island-level touch semantics from grid cells."
+description = "Solve island-beam lock puzzles by deriving ordered entry semantics from beam paths."
 
 [verifier]
 timeout_sec = 900.0

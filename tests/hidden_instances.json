@@ -1,58 +1,58 @@
 {
   "instances": [
     {
-      "id": "hidden_double_touch_a",
+      "id": "hidden_reentry_a",
       "initial": "1100",
-      "target": "0011",
+      "target": "1011",
       "islands": [
-        {"name": "A", "cells": [[0, 0], [0, 1]]},
+        {"name": "A", "cells": [[0, 0], [0, 2]]},
         {"name": "B", "cells": [[1, 0]]},
-        {"name": "C", "cells": [[1, 1]]},
-        {"name": "D", "cells": [[2, 0], [2, 1]]}
+        {"name": "C", "cells": [[1, 2]]},
+        {"name": "D", "cells": [[2, 1]]}
       ],
       "beams": [
-        {"name": "amber", "cells": [[0, 0], [0, 1], [1, 0]]},
-        {"name": "birch", "cells": [[1, 1], [2, 0], [2, 1]]},
-        {"name": "cedar", "cells": [[0, 0], [1, 1]]},
-        {"name": "dahlia", "cells": [[1, 0], [2, 0]]}
+        {"name": "amber", "path": [[0, 0], [0, 1], [0, 2], [1, 2]]},
+        {"name": "birch", "path": [[1, 0], [2, 0], [2, 1]]},
+        {"name": "cedar", "path": [[0, 0], [1, 0]]},
+        {"name": "dahlia", "path": [[1, 2], [2, 1]]}
       ]
     },
     {
-      "id": "hidden_double_touch_b",
+      "id": "hidden_reentry_b",
       "initial": "00101",
-      "target": "11011",
+      "target": "11010",
       "islands": [
         {"name": "A", "cells": [[0, 0]]},
-        {"name": "B", "cells": [[0, 2], [1, 2]]},
-        {"name": "C", "cells": [[1, 0], [2, 0]]},
-        {"name": "D", "cells": [[2, 2]]},
+        {"name": "B", "cells": [[0, 2], [2, 2]]},
+        {"name": "C", "cells": [[1, 0]]},
+        {"name": "D", "cells": [[1, 2]]},
         {"name": "E", "cells": [[3, 1]]}
       ],
       "beams": [
-        {"name": "agate", "cells": [[0, 2], [1, 2], [2, 2]]},
-        {"name": "basalt", "cells": [[1, 0], [2, 0], [3, 1]]},
-        {"name": "coral", "cells": [[0, 0], [3, 1]]},
-        {"name": "drift", "cells": [[0, 2], [1, 0], [2, 0]]},
-        {"name": "ember", "cells": [[0, 0], [2, 2]]}
+        {"name": "agate", "path": [[0, 2], [1, 2], [2, 2], [3, 2]]},
+        {"name": "basalt", "path": [[1, 0], [2, 0], [3, 1]]},
+        {"name": "coral", "path": [[0, 0], [0, 1], [0, 2], [2, 2]]},
+        {"name": "drift", "path": [[0, 2], [1, 0], [2, 2]]},
+        {"name": "ember", "path": [[0, 0], [3, 1]]}
       ]
     },
     {
-      "id": "hidden_double_touch_c",
+      "id": "hidden_reentry_c",
       "initial": "10010",
-      "target": "00101",
+      "target": "10101",
       "islands": [
-        {"name": "A", "cells": [[0, 0], [1, 0]]},
+        {"name": "A", "cells": [[0, 0], [2, 0]]},
         {"name": "B", "cells": [[0, 1]]},
-        {"name": "C", "cells": [[1, 1], [2, 1]]},
-        {"name": "D", "cells": [[2, 0]]},
-        {"name": "E", "cells": [[3, 0], [3, 1]]}
+        {"name": "C", "cells": [[1, 1], [3, 1]]},
+        {"name": "D", "cells": [[2, 1]]},
+        {"name": "E", "cells": [[3, 0]]}
       ],
       "beams": [
-        {"name": "flint", "cells": [[0, 0], [1, 0], [0, 1]]},
-        {"name": "glade", "cells": [[1, 1], [2, 1], [2, 0]]},
-        {"name": "harbor", "cells": [[3, 0], [3, 1], [0, 1]]},
-        {"name": "ivory", "cells": [[0, 0], [2, 0]]},
-        {"name": "juniper", "cells": [[1, 1], [3, 0]]}
+        {"name": "flint", "path": [[0, 0], [0, 1], [1, 0], [2, 0]]},
+        {"name": "glade", "path": [[1, 1], [2, 1], [3, 1]]},
+        {"name": "harbor", "path": [[3, 0], [3, 1], [0, 1]]},
+        {"name": "ivory", "path": [[0, 0], [2, 0], [2, 1]]},
+        {"name": "juniper", "path": [[1, 1], [3, 1], [3, 0]]}
       ]
     }
   ]

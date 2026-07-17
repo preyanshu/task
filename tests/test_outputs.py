@@ -17,10 +17,13 @@ def beam_mask(instance, beam):
         for cell in island["cells"]:
             cell_to_island[tuple(cell)] = island["name"]
 
-    touched = {cell_to_island[tuple(cell)] for cell in beam["cells"]}
     mask = 0
-    for name in touched:
-        mask ^= 1 << island_index[name]
+    previous = None
+    for cell in beam["path"]:
+        current = cell_to_island.get(tuple(cell))
+        if current is not None and current != previous:
+            mask ^= 1 << island_index[current]
+        previous = current
     return mask
 
 
