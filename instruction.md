@@ -1,7 +1,6 @@
 You are solving Timeline Locks.
 
-The public puzzle instances are in `data/public_instances.json`. Write a solver at
-`solution/solve.py`.
+Write a solver at `solution/solve.py`.
 
 Each instance describes a circular timeline with positions numbered `0` through `n - 1`.
 The state is a binary string of length `n`. You may activate any subset of the named keys
@@ -29,7 +28,58 @@ Your solver is run as:
 python3 solution/solve.py path/to/instances.json
 ```
 
-It must print JSON to stdout with exactly this shape:
+The visible sample instances are:
+
+```json
+{
+  "instances": [
+    {
+      "id": "sample_alpha",
+      "n": 8,
+      "initial": "00110110",
+      "target": "11000101",
+      "keys": [
+        {"name": "amber", "start": 1, "stop": 4},
+        {"name": "cobalt", "start": 5, "stop": 0},
+        {"name": "ember", "start": 2, "stop": 7},
+        {"name": "jade", "start": 6, "stop": 1},
+        {"name": "opal", "start": 0, "stop": 3}
+      ]
+    },
+    {
+      "id": "sample_beta",
+      "n": 9,
+      "initial": "110010011",
+      "target": "000110010",
+      "keys": [
+        {"name": "birch", "start": 0, "stop": 5},
+        {"name": "cedar", "start": 4, "stop": 8},
+        {"name": "dune", "start": 7, "stop": 2},
+        {"name": "iris", "start": 1, "stop": 6},
+        {"name": "moss", "start": 3, "stop": 7},
+        {"name": "rune", "start": 8, "stop": 4}
+      ]
+    },
+    {
+      "id": "sample_gamma",
+      "n": 10,
+      "initial": "0101110010",
+      "target": "1001111111",
+      "keys": [
+        {"name": "atlas", "start": 9, "stop": 3},
+        {"name": "brass", "start": 2, "stop": 6},
+        {"name": "coral", "start": 5, "stop": 9},
+        {"name": "drift", "start": 1, "stop": 4},
+        {"name": "flint", "start": 6, "stop": 0},
+        {"name": "lumen", "start": 3, "stop": 8}
+      ]
+    }
+  ]
+}
+```
+
+Your solver may be tested on additional instances with the same schema. It must print JSON
+to stdout with exactly this shape:
 
 ```json
 {
@@ -40,4 +90,4 @@ It must print JSON to stdout with exactly this shape:
 }
 ```
 
-Include every public instance id exactly once.
+Include every input instance id exactly once.

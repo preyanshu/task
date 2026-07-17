@@ -1,11 +1,13 @@
 import json
+import os
 import subprocess
 from itertools import combinations
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
-SOLVER_PATH = ROOT / "solution" / "solve.py"
+WORKSPACE = Path(os.environ.get("WORKSPACE_DIR", "/workspace"))
+TESTS = Path(os.environ.get("TESTS_DIR", "/tests"))
+SOLVER_PATH = WORKSPACE / "solution" / "solve.py"
 
 
 def swept_positions(n, start, stop):
@@ -46,7 +48,7 @@ def load_instances(path):
 def run_solver(path):
     completed = subprocess.run(
         ["python3", str(SOLVER_PATH), str(path)],
-        cwd=ROOT,
+        cwd=WORKSPACE,
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -74,11 +76,11 @@ def test_solver_file_exists():
 
 
 def test_public_answers_are_exact():
-    check_file(ROOT / "data" / "public_instances.json")
+    check_file(TESTS / "public_instances.json")
 
 
 def test_hidden_answers_are_exact():
-    check_file(ROOT / "tests" / "hidden_instances.json")
+    check_file(TESTS / "hidden_instances.json")
 
 
 if __name__ == "__main__":
