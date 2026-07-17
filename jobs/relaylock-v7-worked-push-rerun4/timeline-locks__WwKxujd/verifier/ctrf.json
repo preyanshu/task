@@ -1,0 +1,41 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784302884.0651696,
+            "stop": 1784302884.1025603
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_all_hidden_levels_solve_and_are_canonical",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.011654211004497483,
+                "start": 1784302884.0794353,
+                "stop": 1784302884.101196,
+                "retries": 0,
+                "file_path": "test_outputs.py",
+                "trace": "def test_all_hidden_levels_solve_and_are_canonical():\n        for level in LEVELS:\n>           commands=run_solver(level); result=replay(level,commands)\n                     ^^^^^^^^^^^^^^^^^\n\n/tests/test_outputs.py:42: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nlevel = {'conveyor': 1, 'goal': 3, 'ice': [2, 3], 'id': 'hidden_ice_conveyor', ...}\n\n    def run_solver(level):\n        with tempfile.TemporaryDirectory() as d:\n            inp=Path(d)/'level.json'; out=Path(d)/'out.json'; inp.write_text(json.dumps(level))\n            p=subprocess.run(['python3','/app/solve.py',str(inp),str(out)],capture_output=True,text=True,timeout=10)\n>           assert p.returncode==0,p.stderr\nE           AssertionError: python3: can't open file '/app/solve.py': [Errno 2] No such file or directory\nE             \nE           assert 2 == 0\nE            +  where 2 = CompletedProcess(args=['python3', '/app/solve.py', '/tmp/tmp_zoose1y/level.json', '/tmp/tmp_zoose1y/out.json'], returncode=2, stdout='', stderr=\"python3: can't open file '/app/solve.py': [Errno 2] No such file or directory\\n\").returncode\n\n/tests/test_outputs.py:11: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_outputs.py::test_wrong_phase_order_is_rejected",
+                "status": "passed",
+                "duration": 0.0005433389960671775,
+                "start": 1784302884.1015651,
+                "stop": 1784302884.1023273,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

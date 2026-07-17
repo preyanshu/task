@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.14, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+../tests/test_outputs.py ..                                              [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_outputs.py::test_all_hidden_levels_solve_and_are_canonical
+PASSED ../tests/test_outputs.py::test_wrong_phase_order_is_rejected
+============================== 2 passed in 0.06s ===============================

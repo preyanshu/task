@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "timeline-locks__ZhSPDbf",
+    "trials_dir": "jobs/relaylock-v7-codex-final-clean2",
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "env": {
+            "CODEX_FORCE_AUTH_JSON": "****"
+        }
+    },
+    "job_id": "cb836867-746c-4476-b205-d2c1ee22ed92"
+}

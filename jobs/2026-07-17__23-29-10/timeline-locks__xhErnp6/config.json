@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "timeline-locks__xhErnp6",
+    "trials_dir": "jobs/2026-07-17__23-29-10",
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "env": {
+            "CODEX_AUTH_JSON_PATH": "${CODEX_AUTH_JSON_PATH}"
+        }
+    },
+    "job_id": "8eaeca76-bf3b-46bb-baef-3b1a0d94c8a8"
+}

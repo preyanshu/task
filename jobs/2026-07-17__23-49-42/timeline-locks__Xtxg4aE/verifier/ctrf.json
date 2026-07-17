@@ -1,0 +1,38 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784312460.9020367,
+            "stop": 1784312461.001536
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_all_hidden_levels_solve_and_are_canonical",
+                "status": "passed",
+                "duration": 0.054264576996502,
+                "start": 1784312460.9434729,
+                "stop": 1784312460.9986675,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_legal_but_noncanonical_wait_tie_is_rejected",
+                "status": "passed",
+                "duration": 0.001243592007085681,
+                "start": 1784312460.999316,
+                "stop": 1784312461.0009644,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

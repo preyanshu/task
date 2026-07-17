@@ -1,0 +1,36 @@
+{
+    "schema_version": 1,
+    "task": {
+        "name": "timeline-locks",
+        "type": "local",
+        "digest": "sha256:78f8a0633237de555757c71a71c99c5b1d4ceafaa3bd2705eef7ec5601be2fd1",
+        "path": "."
+    },
+    "install_only": false,
+    "timeout_multiplier": 1.0,
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "skills": [],
+        "extra_allowed_hosts": [],
+        "kwargs": {},
+        "env": {
+            "CODEX_AUTH_JSON_PATH": "${CODEX_AUTH_JSON_PATH}"
+        },
+        "mcp_servers": []
+    },
+    "skills": [],
+    "environment": {
+        "type": "docker",
+        "force_build": false,
+        "delete": true,
+        "cpu_enforcement_policy": "auto",
+        "memory_enforcement_policy": "auto",
+        "extra_docker_compose": [],
+        "kwargs": {},
+        "extra_allowed_hosts": []
+    },
+    "verifier": {
+        "disable": false
+    }
+}

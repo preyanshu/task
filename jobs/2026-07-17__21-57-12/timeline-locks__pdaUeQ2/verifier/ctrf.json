@@ -1,0 +1,38 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784305896.835794,
+            "stop": 1784305896.9552963
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_all_hidden_levels_solve_and_are_canonical",
+                "status": "passed",
+                "duration": 0.08016682500601746,
+                "start": 1784305896.8734407,
+                "stop": 1784305896.9541626,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_wrong_phase_order_is_rejected",
+                "status": "passed",
+                "duration": 0.00039658499736106023,
+                "start": 1784305896.9544961,
+                "stop": 1784305896.9550545,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

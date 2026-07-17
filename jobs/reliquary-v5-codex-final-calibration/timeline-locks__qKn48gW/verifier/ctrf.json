@@ -1,0 +1,74 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 6,
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784300213.4291756,
+            "stop": 1784300213.4770036
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_schema_and_legal_replay",
+                "status": "passed",
+                "duration": 0.00045307400432648137,
+                "start": 1784300213.4556036,
+                "stop": 1784300213.4562502,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_opens",
+                "status": "passed",
+                "duration": 0.00037703700218116865,
+                "start": 1784300213.45688,
+                "stop": 1784300213.4573789,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_canonical_metrics_and_order",
+                "status": "passed",
+                "duration": 0.000312055999529548,
+                "start": 1784300213.4575245,
+                "stop": 1784300213.4579394,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_author_proof_is_small_and_independent",
+                "status": "passed",
+                "duration": 0.009497232000285294,
+                "start": 1784300213.458068,
+                "stop": 1784300213.4677267,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_phase_mutations_are_grade_relevant",
+                "status": "passed",
+                "duration": 0.0002856330029317178,
+                "start": 1784300213.467917,
+                "stop": 1784300213.4683046,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_black_box_matches_model",
+                "status": "passed",
+                "duration": 0.008149707988195587,
+                "start": 1784300213.468448,
+                "stop": 1784300213.4767997,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

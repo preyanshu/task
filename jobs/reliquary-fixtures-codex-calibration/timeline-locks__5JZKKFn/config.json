@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "timeline-locks__5JZKKFn",
+    "trials_dir": "jobs/reliquary-fixtures-codex-calibration",
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "env": {
+            "CODEX_FORCE_AUTH_JSON": "****"
+        }
+    },
+    "job_id": "2a222315-e583-43d8-a150-0bd4019726c8"
+}

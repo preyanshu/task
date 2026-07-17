@@ -1,0 +1,11 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "timeline-locks__dMeLfUX",
+    "trials_dir": "jobs/reliquary-daemon-nop",
+    "agent": {
+        "name": "nop"
+    },
+    "job_id": "a5d06f8a-3ae9-4505-8453-c6bcf37a44e8"
+}

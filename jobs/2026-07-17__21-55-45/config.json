@@ -1,0 +1,17 @@
+{
+    "n_attempts": 4,
+    "agents": [
+        {
+            "name": "codex",
+            "model_name": "openai/gpt-5-codex",
+            "env": {
+                "CODEX_AUTH_JSON_PATH": "${CODEX_AUTH_JSON_PATH}"
+            }
+        }
+    ],
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

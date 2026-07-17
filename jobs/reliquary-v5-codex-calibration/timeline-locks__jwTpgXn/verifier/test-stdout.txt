@@ -1,0 +1,161 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.14, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 6 items
+
+../tests/test_outputs.py FFF...                                          [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_schema_and_legal_replay _________________________
+
+commands = ['move east'], mutation = None
+
+    def replay(commands, mutation=None):
+        g=Reliquary(mutation)
+        for i,c in enumerate(commands,1):
+>           try:g.apply(c)
+                ^^^^^^^^^^
+
+/tests/reliquary_model.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <reliquary_model.Reliquary object at 0x736d61fb1fd0>
+command = 'move east'
+
+    def apply(self,command):
+        if not isinstance(command,str) or not command or command.strip()!=command: raise IllegalCommand('normalized command required')
+        if self.state.opened: raise IllegalCommand('already open')
+        w=command.split(); s=self.state
+        if len(w)==2 and w[0]=='move' and w[1] in DIRS:
+            dr,dc=DIRS[w[1]]; p=(s.player[0]+dr,s.player[1]+dc)
+>           if not self.passable(p) or p==s.amber: raise IllegalCommand('blocked move')
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           reliquary_model.IllegalCommand: blocked move
+
+/tests/reliquary_model.py:42: IllegalCommand
+
+The above exception was the direct cause of the following exception:
+
+    def test_schema_and_legal_replay():
+>       commands=load(); state=replay(commands); assert state.commands==len(commands)
+                               ^^^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+commands = ['move east'], mutation = None
+
+    def replay(commands, mutation=None):
+        g=Reliquary(mutation)
+        for i,c in enumerate(commands,1):
+            try:g.apply(c)
+>           except IllegalCommand as e:raise IllegalCommand(f'command {i} ({c!r}): {e}') from e
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           reliquary_model.IllegalCommand: command 1 ('move east'): blocked move
+
+/tests/reliquary_model.py:74: IllegalCommand
+__________________________________ test_opens __________________________________
+
+commands = ['move east'], mutation = None
+
+    def replay(commands, mutation=None):
+        g=Reliquary(mutation)
+        for i,c in enumerate(commands,1):
+>           try:g.apply(c)
+                ^^^^^^^^^^
+
+/tests/reliquary_model.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <reliquary_model.Reliquary object at 0x736d6201c2d0>
+command = 'move east'
+
+    def apply(self,command):
+        if not isinstance(command,str) or not command or command.strip()!=command: raise IllegalCommand('normalized command required')
+        if self.state.opened: raise IllegalCommand('already open')
+        w=command.split(); s=self.state
+        if len(w)==2 and w[0]=='move' and w[1] in DIRS:
+            dr,dc=DIRS[w[1]]; p=(s.player[0]+dr,s.player[1]+dc)
+>           if not self.passable(p) or p==s.amber: raise IllegalCommand('blocked move')
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           reliquary_model.IllegalCommand: blocked move
+
+/tests/reliquary_model.py:42: IllegalCommand
+
+The above exception was the direct cause of the following exception:
+
+>   def test_opens(): assert replay(load()).opened
+                             ^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:21: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+commands = ['move east'], mutation = None
+
+    def replay(commands, mutation=None):
+        g=Reliquary(mutation)
+        for i,c in enumerate(commands,1):
+            try:g.apply(c)
+>           except IllegalCommand as e:raise IllegalCommand(f'command {i} ({c!r}): {e}') from e
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           reliquary_model.IllegalCommand: command 1 ('move east'): blocked move
+
+/tests/reliquary_model.py:74: IllegalCommand
+_______________________ test_canonical_metrics_and_order _______________________
+
+commands = ['move east'], mutation = None
+
+    def replay(commands, mutation=None):
+        g=Reliquary(mutation)
+        for i,c in enumerate(commands,1):
+>           try:g.apply(c)
+                ^^^^^^^^^^
+
+/tests/reliquary_model.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <reliquary_model.Reliquary object at 0x736d6201ca50>
+command = 'move east'
+
+    def apply(self,command):
+        if not isinstance(command,str) or not command or command.strip()!=command: raise IllegalCommand('normalized command required')
+        if self.state.opened: raise IllegalCommand('already open')
+        w=command.split(); s=self.state
+        if len(w)==2 and w[0]=='move' and w[1] in DIRS:
+            dr,dc=DIRS[w[1]]; p=(s.player[0]+dr,s.player[1]+dc)
+>           if not self.passable(p) or p==s.amber: raise IllegalCommand('blocked move')
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           reliquary_model.IllegalCommand: blocked move
+
+/tests/reliquary_model.py:42: IllegalCommand
+
+The above exception was the direct cause of the following exception:
+
+    def test_canonical_metrics_and_order():
+>       commands=load(); state=replay(commands)
+                               ^^^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+commands = ['move east'], mutation = None
+
+    def replay(commands, mutation=None):
+        g=Reliquary(mutation)
+        for i,c in enumerate(commands,1):
+            try:g.apply(c)
+>           except IllegalCommand as e:raise IllegalCommand(f'command {i} ({c!r}): {e}') from e
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           reliquary_model.IllegalCommand: command 1 ('move east'): blocked move
+
+/tests/reliquary_model.py:74: IllegalCommand
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_outputs.py::test_author_proof_is_small_and_independent
+PASSED ../tests/test_outputs.py::test_phase_mutations_are_grade_relevant
+PASSED ../tests/test_outputs.py::test_black_box_matches_model
+FAILED ../tests/test_outputs.py::test_schema_and_legal_replay - reliquary_mod...
+FAILED ../tests/test_outputs.py::test_opens - reliquary_model.IllegalCommand:...
+FAILED ../tests/test_outputs.py::test_canonical_metrics_and_order - reliquary...
+========================= 3 failed, 3 passed in 0.08s ==========================

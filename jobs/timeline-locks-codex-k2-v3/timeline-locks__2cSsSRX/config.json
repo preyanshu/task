@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "timeline-locks__2cSsSRX",
+    "trials_dir": "jobs/timeline-locks-codex-k2-v3",
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "env": {
+            "CODEX_FORCE_AUTH_JSON": "****"
+        }
+    },
+    "job_id": "b5ce6398-924f-4a8e-9683-9119f6a9d6d2"
+}

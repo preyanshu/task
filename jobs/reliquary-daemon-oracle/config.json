@@ -1,0 +1,10 @@
+{
+    "job_name": "reliquary-daemon-oracle",
+    "n_concurrent_trials": 1,
+    "quiet": true,
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

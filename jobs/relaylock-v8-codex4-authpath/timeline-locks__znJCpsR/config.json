@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "/home/preyanshu/Downloads/fix-task-broken/timeline-locks"
+    },
+    "trial_name": "timeline-locks__znJCpsR",
+    "trials_dir": "jobs/relaylock-v8-codex4-authpath",
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "env": {
+            "CODEX_AUTH_JSON_PATH": "/hom****son"
+        }
+    },
+    "job_id": "8a4fff7f-79a7-468e-8bee-88ab9b37fb6e"
+}

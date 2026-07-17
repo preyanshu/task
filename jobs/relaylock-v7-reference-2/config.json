@@ -1,0 +1,10 @@
+{
+    "job_name": "relaylock-v7-reference-2",
+    "n_concurrent_trials": 1,
+    "quiet": true,
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

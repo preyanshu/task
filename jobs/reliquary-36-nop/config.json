@@ -1,0 +1,15 @@
+{
+    "job_name": "reliquary-36-nop",
+    "n_concurrent_trials": 1,
+    "quiet": true,
+    "agents": [
+        {
+            "name": "nop"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

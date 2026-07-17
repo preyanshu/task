@@ -1,0 +1,38 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784312607.6820326,
+            "stop": 1784312607.762796
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_all_hidden_levels_solve_and_are_canonical",
+                "status": "passed",
+                "duration": 0.04489455799921416,
+                "start": 1784312607.7156832,
+                "stop": 1784312607.7610502,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_long_canonical_route_is_required",
+                "status": "passed",
+                "duration": 0.0008739570112084039,
+                "start": 1784312607.7614434,
+                "stop": 1784312607.7625437,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

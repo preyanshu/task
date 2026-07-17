@@ -1,0 +1,57 @@
+{
+    "schema_version": 2,
+    "created_at": "2026-07-17T13:32:47.609894Z",
+    "harbor": {
+        "version": "0.18.0",
+        "is_editable": false
+    },
+    "n_concurrent_trials": 1,
+    "retry": {
+        "max_retries": 0,
+        "exclude_exceptions": [
+            "RewardFileNotFoundError",
+            "ApiUsageLimitError",
+            "VerifierOutputParseError",
+            "VerifierTimeoutError",
+            "RewardFileEmptyError",
+            "AgentTimeoutError"
+        ],
+        "wait_multiplier": 1.0,
+        "min_wait_sec": 1.0,
+        "max_wait_sec": 60.0
+    },
+    "trials": [
+        {
+            "schema_version": 1,
+            "task": {
+                "name": "timeline-locks",
+                "type": "local",
+                "digest": "sha256:54de238065afab7e4f8e2b521c7de27ac3f317830416c070b91e2037edce36af",
+                "path": "."
+            },
+            "install_only": false,
+            "timeout_multiplier": 1.0,
+            "agent": {
+                "name": "oracle",
+                "skills": [],
+                "extra_allowed_hosts": [],
+                "kwargs": {},
+                "mcp_servers": []
+            },
+            "skills": [],
+            "environment": {
+                "type": "docker",
+                "force_build": false,
+                "delete": true,
+                "cpu_enforcement_policy": "auto",
+                "memory_enforcement_policy": "auto",
+                "extra_docker_compose": [],
+                "kwargs": {},
+                "extra_allowed_hosts": []
+            },
+            "verifier": {
+                "disable": false
+            }
+        }
+    ]
+}

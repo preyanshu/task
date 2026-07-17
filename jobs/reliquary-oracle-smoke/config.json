@@ -1,0 +1,10 @@
+{
+    "job_name": "reliquary-oracle-smoke",
+    "n_concurrent_trials": 1,
+    "quiet": true,
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

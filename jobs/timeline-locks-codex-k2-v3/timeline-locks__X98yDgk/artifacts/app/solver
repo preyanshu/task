@@ -1,0 +1,281 @@
+#!/usr/bin/env python3
+
+import json
+import sys
+
+
+BOARD_SIZE = 4
+ACTION_ORDER = [
+    "D0",
+    "D1",
+    "D2",
+    "D3",
+    "L0",
+    "L1",
+    "L2",
+    "L3",
+    "R0",
+    "R1",
+    "R2",
+    "R3",
+    "U0",
+    "U1",
+    "U2",
+    "U3",
+]
+ACTION_RANK = {action: index for index, action in enumerate(ACTION_ORDER)}
+ACTION_KIND = {action: ("row" if action[0] in "LR" else "col") for action in ACTION_ORDER}
+INVERSE_ACTION = {
+    **{f"R{i}": f"L{i}" for i in range(BOARD_SIZE)},
+    **{f"L{i}": f"R{i}" for i in range(BOARD_SIZE)},
+    **{f"D{i}": f"U{i}" for i in range(BOARD_SIZE)},
+    **{f"U{i}": f"D{i}" for i in range(BOARD_SIZE)},
+}
+BOARD_OPS = {"set", "add", "shift_row", "shift_col", "rotate", "swap", "copy"}
+
+
+def board_index(row, col):
+    return row * BOARD_SIZE + col
+
+
+def apply_set(board, event, modulus):
+    board[board_index(event["row"], event["col"])] = event["value"] % modulus
+
+
+def apply_add(board, event, modulus):
+    for row in range(event["top"], event["bottom"] + 1):
+        base = row * BOARD_SIZE
+        for col in range(event["left"], event["right"] + 1):
+            idx = base + col
+            board[idx] = (board[idx] + event["delta"]) % modulus
+
+
+def apply_shift_row(board, row, amount):
+    shift = amount % BOARD_SIZE
+    if shift == 0:
+        return
+    start = row * BOARD_SIZE
+    values = board[start : start + BOARD_SIZE]
+    board[start : start + BOARD_SIZE] = values[-shift:] + values[:-shift]
+
+
+def apply_shift_col(board, col, amount):
+    shift = amount % BOARD_SIZE
+    if shift == 0:
+        return
+    values = [board[board_index(row, col)] for row in range(BOARD_SIZE)]
+    shifted = values[-shift:] + values[:-shift]
+    for row, value in enumerate(shifted):
+        board[board_index(row, col)] = value
+
+
+def apply_rotate(board, event):
+    size = event["size"]
+    turns = event["turns"] % 4
+    if turns == 0:
+        return
+    top = event["top"]
+    left = event["left"]
+    snapshot = board[:]
+    for row in range(size):
+        for col in range(size):
+            src_row = top + row
+            src_col = left + col
+            if turns == 1:
+                dst_row = top + col
+                dst_col = left + size - 1 - row
+            elif turns == 2:
+                dst_row = top + size - 1 - row
+                dst_col = left + size - 1 - col
+            else:
+                dst_row = top + size - 1 - col
+                dst_col = left + row
+            board[board_index(dst_row, dst_col)] = snapshot[board_index(src_row, src_col)]
+
+
+def apply_swap(board, event):
+    first = event["first"]
+    second = event["second"]
+    if first == second:
+        return
+    for idx, value in enumerate(board):
+        if value == first:
+            board[idx] = second
+        elif value == second:
+            board[idx] = first
+
+
+def apply_copy(board, event):
+    snapshot = board[:]
+    for row in range(event["height"]):
+        for col in range(event["width"]):
+            source_idx = board_index(event["source_top"] + row, event["source_left"] + col)
+            target_idx = board_index(event["target_top"] + row, event["target_left"] + col)
+            board[target_idx] = snapshot[source_idx]
+
+
+def apply_board_event(board, event, modulus):
+    op = event["op"]
+    if op == "set":
+        apply_set(board, event, modulus)
+    elif op == "add":
+        apply_add(board, event, modulus)
+    elif op == "shift_row":
+        apply_shift_row(board, event["row"], event["amount"])
+    elif op == "shift_col":
+        apply_shift_col(board, event["col"], event["amount"])
+    elif op == "rotate":
+        apply_rotate(board, event)
+    elif op == "swap":
+        apply_swap(board, event)
+    elif op == "copy":
+        apply_copy(board, event)
+
+
+def resolve_board(chapter, modulus):
+    events = sorted(chapter["events"], key=lambda event: event["id"])
+    canceled_targets = set()
+    active = {}
+    amendments = {}
+
+    for event in reversed(events):
+        event_id = event["id"]
+        is_active = event_id not in canceled_targets
+        active[event_id] = is_active
+        if not is_active:
+            continue
+        if event["op"] == "cancel":
+            canceled_targets.add(event["target"])
+        elif event["op"] == "amend":
+            target_fields = amendments.setdefault(event["target"], {})
+            target_fields.setdefault(event["field"], event["value"])
+
+    board = [0] * (BOARD_SIZE * BOARD_SIZE)
+    replay_events = []
+    for original in events:
+        if not active[original["id"]]:
+            continue
+        if original["op"] not in BOARD_OPS:
+            continue
+        event = dict(original)
+        for field, value in amendments.get(original["id"], {}).items():
+            if field != "id":
+                event[field] = value
+        event["id"] = original["id"]
+        replay_events.append(event)
+
+    replay_events.sort(key=lambda event: (event["at"], event["id"]))
+    for event in replay_events:
+        apply_board_event(board, event, modulus)
+    return tuple(value % modulus for value in board)
+
+
+def apply_action(state, action, modulus):
+    board = list(state)
+    index = int(action[1])
+    kind = action[0]
+
+    if kind == "R":
+        start = index * BOARD_SIZE
+        for offset in range(BOARD_SIZE):
+            board[start + offset] = (board[start + offset] + 1) % modulus
+        apply_shift_row(board, index, 1)
+    elif kind == "L":
+        apply_shift_row(board, index, -1)
+        start = index * BOARD_SIZE
+        for offset in range(BOARD_SIZE):
+            board[start + offset] = (board[start + offset] - 1) % modulus
+    elif kind == "D":
+        for row in range(BOARD_SIZE):
+            cell = board_index(row, index)
+            board[cell] = (board[cell] + 1) % modulus
+        apply_shift_col(board, index, 1)
+    else:
+        apply_shift_col(board, index, -1)
+        for row in range(BOARD_SIZE):
+            cell = board_index(row, index)
+            board[cell] = (board[cell] - 1) % modulus
+
+    return tuple(board)
+
+
+def sequence_key(sequence):
+    return tuple(ACTION_RANK[action] for action in sequence)
+
+
+def change_count(sequence):
+    total = 0
+    for first, second in zip(sequence, sequence[1:]):
+        if ACTION_KIND[first] != ACTION_KIND[second]:
+            total += 1
+    return total
+
+
+def backward_to_forward(sequence):
+    return [INVERSE_ACTION[action] for action in reversed(sequence)]
+
+
+def generate_paths(start_state, max_depth, modulus):
+    paths_by_state = {start_state: [[]]}
+    frontier = [(start_state, [])]
+    for _depth in range(max_depth):
+        next_frontier = []
+        for state, sequence in frontier:
+            for action in ACTION_ORDER:
+                next_sequence = sequence + [action]
+                next_state = apply_action(state, action, modulus)
+                paths_by_state.setdefault(next_state, []).append(next_sequence)
+                next_frontier.append((next_state, next_sequence))
+        frontier = next_frontier
+    return paths_by_state
+
+
+def better_solution(candidate, current):
+    if current is None:
+        return True
+    candidate_tuple = (len(candidate), change_count(candidate), sequence_key(candidate))
+    current_tuple = (len(current), change_count(current), sequence_key(current))
+    return candidate_tuple < current_tuple
+
+
+def solve_board(start_state, modulus):
+    zero_state = tuple([0] * (BOARD_SIZE * BOARD_SIZE))
+    forward_paths = generate_paths(start_state, 2, modulus)
+    backward_paths = generate_paths(zero_state, 3, modulus)
+
+    best = None
+    for state, prefixes in forward_paths.items():
+        suffix_sources = backward_paths.get(state)
+        if suffix_sources is None:
+            continue
+        for prefix in prefixes:
+            for backward_sequence in suffix_sources:
+                candidate = prefix + backward_to_forward(backward_sequence)
+                if len(candidate) > 5:
+                    continue
+                if better_solution(candidate, best):
+                    best = candidate
+    return best
+
+
+def main():
+    document = json.load(sys.stdin)
+    if document.get("size") != BOARD_SIZE:
+        raise ValueError(f"unsupported board size: {document.get('size')}")
+    modulus = document["modulus"]
+    chapters = document["chapters"]
+
+    solutions = []
+    for chapter in chapters:
+        board = resolve_board(chapter, modulus)
+        solution = solve_board(board, modulus)
+        if solution is None:
+            raise RuntimeError(f"chapter {chapter.get('name', '<unnamed>')} is unsolved")
+        solutions.append(solution)
+
+    json.dump({"solutions": solutions}, sys.stdout, separators=(",", ":"))
+    sys.stdout.write("\n")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,113 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.14, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 7 items
+
+../tests/test_outputs.py FFF...F                                         [100%]
+
+=================================== FAILURES ===================================
+____________________ test_solution_schema_and_legal_replay _____________________
+
+    def test_solution_schema_and_legal_replay():
+        """Every submitted entry must be a legal puzzle command from a fresh state."""
+>       commands = load_answer()
+                   ^^^^^^^^^^^^^
+
+/tests/test_outputs.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_answer():
+>       assert ANSWER.is_file(), "missing /app/solution.json"
+E       AssertionError: missing /app/solution.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/app/solution.json').is_file
+
+/tests/test_outputs.py:20: AssertionError
+________________________ test_solution_opens_reliquary _________________________
+
+    def test_solution_opens_reliquary():
+        """A complete legal transcript must reach the terminal open state."""
+>       state = replay(load_answer(), ACTIVE["initial_dials"])
+                       ^^^^^^^^^^^^^
+
+/tests/test_outputs.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_answer():
+>       assert ANSWER.is_file(), "missing /app/solution.json"
+E       AssertionError: missing /app/solution.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/app/solution.json').is_file
+
+/tests/test_outputs.py:20: AssertionError
+__________________ test_solution_is_unique_canonical_optimum ___________________
+
+    def test_solution_is_unique_canonical_optimum():
+        """Grade command count, pushes, irreversible actions, and the canonical tie-break."""
+>       commands = load_answer()
+                   ^^^^^^^^^^^^^
+
+/tests/test_outputs.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def load_answer():
+>       assert ANSWER.is_file(), "missing /app/solution.json"
+E       AssertionError: missing /app/solution.json
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/app/solution.json').is_file
+
+/tests/test_outputs.py:20: AssertionError
+________ test_agent_interface_matches_independent_replay_on_checkpoints ________
+
+    def test_agent_interface_matches_independent_replay_on_checkpoints():
+        """The shipped black-box and verifier agree without sharing implementation code."""
+        assert INTERFACE.is_file() and os.access(INTERFACE, os.X_OK)
+        checkpoints = (CANONICAL[:5], CANONICAL[:18], CANONICAL[:24], CANONICAL)
+        expected = (
+            ("amber=(5,5)", "A=open"),
+            ("inventory=[sun]", "reset=spent"),
+            ("jade=(3,3)", "B=open"),
+            ("commands=42", "solved=yes"),
+        )
+        for commands, fragments in zip(checkpoints, expected):
+>           output = run_binary(commands)
+                     ^^^^^^^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+commands = ['move east', 'turn alpha clockwise', 'move west', 'move north', 'push amber east']
+
+    def run_binary(commands):
+        with tempfile.TemporaryDirectory() as directory:
+            environment = dict(os.environ, RELIQUARY_STATE=str(Path(directory) / "state"))
+            subprocess.run(
+                [str(INTERFACE), "new"],
+                text=True,
+                capture_output=True,
+                env=environment,
+                timeout=2,
+                check=True,
+            )
+>           assert not Path(environment["RELIQUARY_STATE"]).exists(), "interface leaked branchable world state"
+E           AssertionError: interface leaked branchable world state
+E           assert not True
+E            +  where True = exists()
+E            +    where exists = PosixPath('/tmp/tmpctawimlk/state').exists
+E            +      where PosixPath('/tmp/tmpctawimlk/state') = Path('/tmp/tmpctawimlk/state')
+
+/tests/test_outputs.py:119: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_outputs.py::test_all_eight_seeded_levels_have_a_legal_canonical_solution
+PASSED ../tests/test_outputs.py::test_completed_near_misses_are_legal_but_noncanonical
+PASSED ../tests/test_outputs.py::test_ordering_and_reset_mutations_change_the_replay
+FAILED ../tests/test_outputs.py::test_solution_schema_and_legal_replay - Asse...
+FAILED ../tests/test_outputs.py::test_solution_opens_reliquary - AssertionErr...
+FAILED ../tests/test_outputs.py::test_solution_is_unique_canonical_optimum - ...
+FAILED ../tests/test_outputs.py::test_agent_interface_matches_independent_replay_on_checkpoints
+========================= 4 failed, 3 passed in 0.06s ==========================

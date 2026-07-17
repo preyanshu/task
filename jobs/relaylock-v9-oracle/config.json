@@ -1,0 +1,9 @@
+{
+    "job_name": "relaylock-v9-oracle",
+    "quiet": true,
+    "tasks": [
+        {
+            "path": "/home/preyanshu/Downloads/fix-task-broken/timeline-locks"
+        }
+    ]
+}

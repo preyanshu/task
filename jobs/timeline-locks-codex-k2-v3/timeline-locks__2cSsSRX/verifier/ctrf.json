@@ -1,0 +1,47 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784292228.8908603,
+            "stop": 1784292236.5571086
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_solver_runs_on_every_hidden_case",
+                "status": "passed",
+                "duration": 2.536784333999094,
+                "start": 1784292228.907072,
+                "stop": 1784292231.4442663,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_hidden_sequences_are_legal",
+                "status": "passed",
+                "duration": 2.538410824003222,
+                "start": 1784292231.4447937,
+                "stop": 1784292233.9835851,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_hidden_sequences_are_canonical",
+                "status": "passed",
+                "duration": 2.572518825996667,
+                "start": 1784292233.983942,
+                "stop": 1784292236.5567832,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

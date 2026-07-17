@@ -1,0 +1,114 @@
+{
+    "id": "8cfaad94-c977-4266-91fe-ec5e36219099",
+    "task_name": "dynamo/clockwork-reliquary",
+    "trial_name": "timeline-locks__FbyCaKX",
+    "trial_uri": "file:///home/preyanshu/Downloads/fix-task-broken/timeline-locks/jobs/2026-07-17__23-32-40/timeline-locks__FbyCaKX",
+    "task_id": {
+        "path": "."
+    },
+    "source": null,
+    "task_checksum": "11d0e99ff23939d39769d3b2e059a8a16ad215048c798ad0d31cb61c49ce16bc",
+    "config": {
+        "task": {
+            "path": ".",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "timeline-locks__FbyCaKX",
+        "trials_dir": "jobs/2026-07-17__23-32-40",
+        "install_only": false,
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "codex",
+            "import_path": null,
+            "model_name": "gpt-5.4",
+            "n_concurrent": null,
+            "concurrency_group": null,
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {},
+            "env": {
+                "CODEX_AUTH_JSON_PATH": "${CODEX_AUTH_JSON_PATH}"
+            },
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "job_id": "1d08612a-c6da-4dc5-9d7a-da7fe3baa4eb"
+    },
+    "agent_info": {
+        "name": "codex",
+        "version": "0.144.1",
+        "model_info": {
+            "name": "gpt-5.4",
+            "provider": null
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 211946,
+        "n_cache_tokens": 191616,
+        "n_output_tokens": 10199,
+        "cost_usd": 0.251714,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-17T18:02:40.503480Z",
+    "finished_at": "2026-07-17T18:06:34.515578Z",
+    "environment_setup": {
+        "started_at": "2026-07-17T18:02:40.608849Z",
+        "finished_at": "2026-07-17T18:02:42.171278Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-17T18:02:42.171328Z",
+        "finished_at": "2026-07-17T18:02:42.757790Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-17T18:02:42.757971Z",
+        "finished_at": "2026-07-17T18:06:12.936820Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-17T18:06:20.164180Z",
+        "finished_at": "2026-07-17T18:06:22.914107Z"
+    },
+    "step_results": null
+}

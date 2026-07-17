@@ -1,0 +1,10 @@
+{
+    "job_name": "reliquary-oracle-pass",
+    "n_concurrent_trials": 1,
+    "quiet": true,
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

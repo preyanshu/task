@@ -1,0 +1,253 @@
+#!/usr/bin/env python3
+
+import json
+import sys
+from collections import deque
+from functools import lru_cache
+
+
+ACTION_ORDER = [f"D{i}" for i in range(4)]
+ACTION_ORDER += [f"L{i}" for i in range(4)]
+ACTION_ORDER += [f"R{i}" for i in range(4)]
+ACTION_ORDER += [f"U{i}" for i in range(4)]
+BOARD_OPS = {"set", "add", "shift_row", "shift_col", "rotate", "swap", "copy"}
+ZERO_STATE = bytes([0] * 16)
+MAX_ACTIONS = 5
+
+
+def action_orientation(action):
+    return "row" if action[0] in "LR" else "col"
+
+
+def apply_solver_action(state, action, modulus=4, size=4):
+    board = bytearray(state)
+    kind = action[0]
+    index = int(action[1:])
+
+    if kind in "LR":
+        start = index * size
+        row = list(board[start : start + size])
+        if kind == "R":
+            row = [(value + 1) % modulus for value in row]
+            row = row[-1:] + row[:-1]
+        else:
+            row = row[1:] + row[:1]
+            row = [(value - 1) % modulus for value in row]
+        board[start : start + size] = bytes(row)
+        return bytes(board)
+
+    column = [board[index + row * size] for row in range(size)]
+    if kind == "D":
+        column = [(value + 1) % modulus for value in column]
+        column = column[-1:] + column[:-1]
+    else:
+        column = column[1:] + column[:1]
+        column = [(value - 1) % modulus for value in column]
+    for row, value in enumerate(column):
+        board[index + row * size] = value
+    return bytes(board)
+
+
+def build_distance_table():
+    distances = {ZERO_STATE: 0}
+    queue = deque([ZERO_STATE])
+
+    while queue:
+        state = queue.popleft()
+        depth = distances[state]
+        if depth == MAX_ACTIONS:
+            continue
+        for action in ACTION_ORDER:
+            next_state = apply_solver_action(state, action)
+            if next_state in distances:
+                continue
+            distances[next_state] = depth + 1
+            queue.append(next_state)
+
+    return distances
+
+
+DISTANCES = build_distance_table()
+
+
+def resolve_board_state(chapter, size, modulus):
+    events = chapter["events"]
+    events_by_id = {event["id"]: event for event in events}
+
+    canceled = set()
+    active = {}
+    for event in sorted(events, key=lambda item: item["id"], reverse=True):
+        event_id = event["id"]
+        is_active = event_id not in canceled
+        active[event_id] = is_active
+        if is_active and event["op"] == "cancel":
+            canceled.add(event["target"])
+
+    amendments_by_target = {}
+    for event in sorted(events, key=lambda item: item["id"], reverse=True):
+        if not active[event["id"]] or event["op"] != "amend":
+            continue
+        target_id = event["target"]
+        target = events_by_id.get(target_id)
+        if target is None or not active.get(target_id, False):
+            continue
+        target_amendments = amendments_by_target.setdefault(target_id, {})
+        field = event["field"]
+        if field not in target_amendments:
+            target_amendments[field] = event["value"]
+
+    board_events = []
+    for event in events:
+        if not active[event["id"]] or event["op"] not in BOARD_OPS:
+            continue
+        effective = dict(event)
+        for field, value in amendments_by_target.get(event["id"], {}).items():
+            effective[field] = value
+        board_events.append(effective)
+
+    board_events.sort(key=lambda event: (event["at"], event["id"]))
+    board = [[0] * size for _ in range(size)]
+
+    for event in board_events:
+        op = event["op"]
+
+        if op == "set":
+            board[event["row"]][event["col"]] = event["value"] % modulus
+            continue
+
+        if op == "add":
+            delta = event["delta"] % modulus
+            for row in range(event["top"], event["bottom"] + 1):
+                for col in range(event["left"], event["right"] + 1):
+                    board[row][col] = (board[row][col] + delta) % modulus
+            continue
+
+        if op == "shift_row":
+            row = event["row"]
+            amount = event["amount"] % size
+            values = board[row][:]
+            if amount:
+                values = values[-amount:] + values[:-amount]
+            board[row] = values
+            continue
+
+        if op == "shift_col":
+            col = event["col"]
+            amount = event["amount"] % size
+            values = [board[row][col] for row in range(size)]
+            if amount:
+                values = values[-amount:] + values[:-amount]
+            for row, value in enumerate(values):
+                board[row][col] = value
+            continue
+
+        if op == "rotate":
+            top = event["top"]
+            left = event["left"]
+            square_size = event["size"]
+            turns = event["turns"] % 4
+            if turns:
+                block = [row[left : left + square_size] for row in board[top : top + square_size]]
+                for _ in range(turns):
+                    block = [list(row) for row in zip(*block[::-1])]
+                for row in range(square_size):
+                    board[top + row][left : left + square_size] = block[row]
+            continue
+
+        if op == "swap":
+            first = event["first"] % modulus
+            second = event["second"] % modulus
+            for row in range(size):
+                for col in range(size):
+                    value = board[row][col]
+                    if value == first:
+                        board[row][col] = second
+                    elif value == second:
+                        board[row][col] = first
+            continue
+
+        if op == "copy":
+            snapshot = [row[:] for row in board]
+            for row_offset in range(event["height"]):
+                for col_offset in range(event["width"]):
+                    board[event["target_top"] + row_offset][event["target_left"] + col_offset] = snapshot[
+                        event["source_top"] + row_offset
+                    ][event["source_left"] + col_offset]
+            continue
+
+        raise ValueError(f"unsupported board op: {op}")
+
+    return bytes(value % modulus for row in board for value in row)
+
+
+def solve_state(initial_state, size, modulus):
+    if size != 4 or modulus != 4:
+        raise ValueError("solver actions are defined for a 4x4 board modulo 4")
+    if initial_state not in DISTANCES:
+        raise ValueError("chapter is not solvable within five actions")
+
+    @lru_cache(maxsize=None)
+    def min_switches(state, previous_orientation_code):
+        remaining = DISTANCES[state]
+        if remaining == 0:
+            return 0
+
+        if previous_orientation_code == 2:
+            previous_orientation = None
+        else:
+            previous_orientation = "row" if previous_orientation_code == 0 else "col"
+
+        best = MAX_ACTIONS
+        for action in ACTION_ORDER:
+            next_state = apply_solver_action(state, action, modulus, size)
+            if DISTANCES.get(next_state) != remaining - 1:
+                continue
+            orientation = action_orientation(action)
+            penalty = 0 if previous_orientation in (None, orientation) else 1
+            next_code = 0 if orientation == "row" else 1
+            candidate = penalty + min_switches(next_state, next_code)
+            if candidate < best:
+                best = candidate
+        return best
+
+    solution = []
+    state = initial_state
+    previous_orientation = None
+    previous_code = 2
+
+    while DISTANCES[state] > 0:
+        remaining = DISTANCES[state]
+        target_switches = min_switches(state, previous_code)
+        for action in ACTION_ORDER:
+            next_state = apply_solver_action(state, action, modulus, size)
+            if DISTANCES.get(next_state) != remaining - 1:
+                continue
+            orientation = action_orientation(action)
+            penalty = 0 if previous_orientation in (None, orientation) else 1
+            next_code = 0 if orientation == "row" else 1
+            if penalty + min_switches(next_state, next_code) != target_switches:
+                continue
+            solution.append(action)
+            state = next_state
+            previous_orientation = orientation
+            previous_code = next_code
+            break
+
+    return solution
+
+
+def main():
+    document = json.load(sys.stdin)
+    size = document["size"]
+    modulus = document["modulus"]
+
+    solutions = []
+    for chapter in document["chapters"]:
+        state = resolve_board_state(chapter, size, modulus)
+        solutions.append(solve_state(state, size, modulus))
+
+    json.dump({"solutions": solutions}, sys.stdout, separators=(",", ":"))
+
+
+if __name__ == "__main__":
+    main()

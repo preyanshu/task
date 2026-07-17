@@ -1,0 +1,41 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784302515.6804152,
+            "stop": 1784302515.7471309
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_all_hidden_levels_solve_and_are_canonical",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.039874542999314144,
+                "start": 1784302515.6957347,
+                "stop": 1784302515.746364,
+                "retries": 0,
+                "file_path": "test_outputs.py",
+                "trace": "def test_all_hidden_levels_solve_and_are_canonical():\n        for level in LEVELS:\n>           commands=run_solver(level); result=replay(level,commands)\n                                               ^^^^^^^^^^^^^^^^^^^^^^\n\n/tests/test_outputs.py:42: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nlevel = {'conveyor': 1, 'goal': 3, 'ice': [2, 3], 'id': 'hidden_ice_conveyor', ...}\ncommands = ['turn clockwise', 'move east', 'move east', 'move east', 'take key', 'use key']\n\n    def replay(level,commands):\n        n=level['length']; s=dict(level['start']); dial={'N':0,'E':1,'S':2,'W':3}[s['dial']]; crate=s['crate']; player=s['player']; key=s['key']; wear=pushes=0\n        for i,c in enumerate(commands,1):\n            if c=='turn clockwise': dial=(dial+1)%4\n            elif c=='turn counterclockwise': dial=(dial-1)%4\n            elif c=='move east':\n>               if player+1>=n or player+1==crate: raise AssertionError(f'illegal {i}')\n                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE               AssertionError: illegal 3\n\n/tests/test_outputs.py:21: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_outputs.py::test_wrong_phase_order_is_rejected",
+                "status": "passed",
+                "duration": 0.00030783099646214396,
+                "start": 1784302515.7465823,
+                "stop": 1784302515.7470055,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

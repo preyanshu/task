@@ -1,0 +1,10 @@
+{
+    "job_name": "reliquary-36-proof-oracle",
+    "n_concurrent_trials": 1,
+    "quiet": true,
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "timeline-locks__PgYKFrm",
+    "trials_dir": "jobs/2026-07-17__23-04-47",
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "env": {
+            "CODEX_AUTH_JSON_PATH": "${CODEX_AUTH_JSON_PATH}"
+        }
+    },
+    "job_id": "a9f23883-ed4e-435e-87bd-54aff028206b"
+}

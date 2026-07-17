@@ -1,0 +1,17 @@
+{
+    "job_name": "reliquary-codex-calibration-1",
+    "n_attempts": 2,
+    "n_concurrent_trials": 2,
+    "quiet": true,
+    "agents": [
+        {
+            "name": "codex",
+            "model_name": "gpt-5.4"
+        }
+    ],
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

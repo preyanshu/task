@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "timeline-locks__RSK25YR",
+    "trials_dir": "jobs/reliquary-codex-calibration-clean",
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "env": {
+            "CODEX_FORCE_AUTH_JSON": "****"
+        }
+    },
+    "job_id": "a3873fcf-6509-4062-b821-60cb99ac690e"
+}

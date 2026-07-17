@@ -1,0 +1,4 @@
+{"levels":[
+ {"id":"worked_push","length":6,"start":{"player":0,"crate":1,"dial":"N","key":false},"conveyor":null,"ice":[],"plate":2,"key_position":1,"goal":1,"target_dial":"E","expected_commands":["push east","move east","take key","turn clockwise","use key"]},
+ {"id":"worked_conveyor","length":7,"start":{"player":0,"crate":1,"dial":"N","key":false},"conveyor":3,"ice":[],"plate":4,"key_position":2,"goal":2,"target_dial":"E","expected_commands":["push east","move east","push east","turn clockwise","move east","take key","use key"]}
+]}

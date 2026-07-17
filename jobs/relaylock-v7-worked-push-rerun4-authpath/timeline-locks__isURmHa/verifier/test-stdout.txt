@@ -1,0 +1,38 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.14, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+../tests/test_outputs.py F.                                              [100%]
+
+=================================== FAILURES ===================================
+________________ test_all_hidden_levels_solve_and_are_canonical ________________
+
+    def test_all_hidden_levels_solve_and_are_canonical():
+        for level in LEVELS:
+>           commands=run_solver(level); result=replay(level,commands)
+                                               ^^^^^^^^^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+level = {'conveyor': 1, 'goal': 3, 'ice': [2, 3], 'id': 'hidden_ice_conveyor', ...}
+commands = ['turn clockwise', 'move east', 'move east', 'move east', 'take key', 'use key']
+
+    def replay(level,commands):
+        n=level['length']; s=dict(level['start']); dial={'N':0,'E':1,'S':2,'W':3}[s['dial']]; crate=s['crate']; player=s['player']; key=s['key']; wear=pushes=0
+        for i,c in enumerate(commands,1):
+            if c=='turn clockwise': dial=(dial+1)%4
+            elif c=='turn counterclockwise': dial=(dial-1)%4
+            elif c=='move east':
+>               if player+1>=n or player+1==crate: raise AssertionError(f'illegal {i}')
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: illegal 3
+
+/tests/test_outputs.py:21: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_outputs.py::test_wrong_phase_order_is_rejected
+FAILED ../tests/test_outputs.py::test_all_hidden_levels_solve_and_are_canonical
+========================= 1 failed, 1 passed in 0.05s ==========================

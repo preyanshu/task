@@ -1,0 +1,92 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 8,
+            "passed": 8,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784298550.537138,
+            "stop": 1784298566.0537155
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_solution_schema_and_legal_replay",
+                "status": "passed",
+                "duration": 0.0005554449890041724,
+                "start": 1784298550.5699239,
+                "stop": 1784298550.5706813,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_solution_opens_reliquary",
+                "status": "passed",
+                "duration": 0.00036584500048775226,
+                "start": 1784298550.5708404,
+                "stop": 1784298550.571311,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_solution_is_unique_canonical_optimum",
+                "status": "passed",
+                "duration": 0.00035779700556304306,
+                "start": 1784298550.57146,
+                "stop": 1784298550.5719125,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_canonical_optimum_has_independent_lower_bound_and_search_proof",
+                "status": "passed",
+                "duration": 15.428330277987698,
+                "start": 1784298550.5720468,
+                "stop": 1784298566.0005698,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_all_eight_seeded_levels_have_a_legal_canonical_solution",
+                "status": "passed",
+                "duration": 0.0009893610040307976,
+                "start": 1784298566.0008016,
+                "stop": 1784298566.0019312,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_completed_near_misses_are_legal_but_noncanonical",
+                "status": "passed",
+                "duration": 0.0003618489936343394,
+                "start": 1784298566.0021033,
+                "stop": 1784298566.0025709,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_ordering_and_reset_mutations_change_the_replay",
+                "status": "passed",
+                "duration": 0.0004753090033773333,
+                "start": 1784298566.0027137,
+                "stop": 1784298566.0033042,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_agent_interface_matches_independent_replay_on_checkpoints",
+                "status": "passed",
+                "duration": 0.04988907199003734,
+                "start": 1784298566.0034564,
+                "stop": 1784298566.053532,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}

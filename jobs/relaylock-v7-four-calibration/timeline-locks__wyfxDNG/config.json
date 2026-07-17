@@ -1,0 +1,15 @@
+{
+    "task": {
+        "path": "."
+    },
+    "trial_name": "timeline-locks__wyfxDNG",
+    "trials_dir": "jobs/relaylock-v7-four-calibration",
+    "agent": {
+        "name": "codex",
+        "model_name": "gpt-5.4",
+        "env": {
+            "CODEX_FORCE_AUTH_JSON": "****"
+        }
+    },
+    "job_id": "fd712ae9-e694-4697-aa1e-0b9d997b89b0"
+}

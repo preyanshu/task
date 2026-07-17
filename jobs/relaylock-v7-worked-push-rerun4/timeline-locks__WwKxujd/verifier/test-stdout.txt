@@ -1,0 +1,37 @@
+============================= test session starts ==============================
+platform linux -- Python 3.13.14, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 2 items
+
+../tests/test_outputs.py F.                                              [100%]
+
+=================================== FAILURES ===================================
+________________ test_all_hidden_levels_solve_and_are_canonical ________________
+
+    def test_all_hidden_levels_solve_and_are_canonical():
+        for level in LEVELS:
+>           commands=run_solver(level); result=replay(level,commands)
+                     ^^^^^^^^^^^^^^^^^
+
+/tests/test_outputs.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+level = {'conveyor': 1, 'goal': 3, 'ice': [2, 3], 'id': 'hidden_ice_conveyor', ...}
+
+    def run_solver(level):
+        with tempfile.TemporaryDirectory() as d:
+            inp=Path(d)/'level.json'; out=Path(d)/'out.json'; inp.write_text(json.dumps(level))
+            p=subprocess.run(['python3','/app/solve.py',str(inp),str(out)],capture_output=True,text=True,timeout=10)
+>           assert p.returncode==0,p.stderr
+E           AssertionError: python3: can't open file '/app/solve.py': [Errno 2] No such file or directory
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['python3', '/app/solve.py', '/tmp/tmp_zoose1y/level.json', '/tmp/tmp_zoose1y/out.json'], returncode=2, stdout='', stderr="python3: can't open file '/app/solve.py': [Errno 2] No such file or directory\n").returncode
+
+/tests/test_outputs.py:11: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_outputs.py::test_wrong_phase_order_is_rejected
+FAILED ../tests/test_outputs.py::test_all_hidden_levels_solve_and_are_canonical
+========================= 1 failed, 1 passed in 0.04s ==========================

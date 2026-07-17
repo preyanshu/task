@@ -1,0 +1,16 @@
+{
+    "agents": [
+        {
+            "name": "codex",
+            "model_name": "gpt-5.4",
+            "env": {
+                "CODEX_AUTH_JSON_PATH": "${CODEX_AUTH_JSON_PATH}"
+            }
+        }
+    ],
+    "tasks": [
+        {
+            "path": "."
+        }
+    ]
+}

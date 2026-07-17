@@ -1,0 +1,92 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 7,
+            "passed": 4,
+            "failed": 3,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1784294198.1494915,
+            "stop": 1784294198.3502839
+        },
+        "tests": [
+            {
+                "name": "test_outputs.py::test_solution_schema_and_legal_replay",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0007441970010404475,
+                "start": 1784294198.1853967,
+                "stop": 1784294198.2000618,
+                "retries": 0,
+                "file_path": "test_outputs.py",
+                "trace": "def test_solution_schema_and_legal_replay():\n        \"\"\"Every submitted entry must be a legal puzzle command from a fresh state.\"\"\"\n>       commands = load_answer()\n                   ^^^^^^^^^^^^^\n\n/tests/test_outputs.py:34: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def load_answer():\n>       assert ANSWER.is_file(), \"missing /app/solution.json\"\nE       AssertionError: missing /app/solution.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/app/solution.json').is_file\n\n/tests/test_outputs.py:20: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_outputs.py::test_solution_opens_reliquary",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0006292980033322237,
+                "start": 1784294198.2002988,
+                "stop": 1784294198.2057526,
+                "retries": 0,
+                "file_path": "test_outputs.py",
+                "trace": "def test_solution_opens_reliquary():\n        \"\"\"A complete legal transcript must reach the terminal open state.\"\"\"\n>       state = replay(load_answer(), ACTIVE[\"initial_dials\"])\n                       ^^^^^^^^^^^^^\n\n/tests/test_outputs.py:44: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def load_answer():\n>       assert ANSWER.is_file(), \"missing /app/solution.json\"\nE       AssertionError: missing /app/solution.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/app/solution.json').is_file\n\n/tests/test_outputs.py:20: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_outputs.py::test_solution_is_unique_canonical_optimum",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005097129978821613,
+                "start": 1784294198.2060173,
+                "stop": 1784294198.210895,
+                "retries": 0,
+                "file_path": "test_outputs.py",
+                "trace": "def test_solution_is_unique_canonical_optimum():\n        \"\"\"Grade command count, pushes, irreversible actions, and the canonical tie-break.\"\"\"\n>       commands = load_answer()\n                   ^^^^^^^^^^^^^\n\n/tests/test_outputs.py:50: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def load_answer():\n>       assert ANSWER.is_file(), \"missing /app/solution.json\"\nE       AssertionError: missing /app/solution.json\nE       assert False\nE        +  where False = is_file()\nE        +    where is_file = PosixPath('/app/solution.json').is_file\n\n/tests/test_outputs.py:20: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_outputs.py::test_all_eight_seeded_levels_have_a_legal_canonical_solution",
+                "status": "passed",
+                "duration": 0.0012811519991373643,
+                "start": 1784294198.2111561,
+                "stop": 1784294198.2126343,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_near_miss_is_legal_and_well_formed_but_incorrect",
+                "status": "passed",
+                "duration": 0.0004540590016404167,
+                "start": 1784294198.2128327,
+                "stop": 1784294198.213433,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_ordering_and_reset_mutations_change_the_replay",
+                "status": "passed",
+                "duration": 0.000606159996095812,
+                "start": 1784294198.2136397,
+                "stop": 1784294198.2143884,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            },
+            {
+                "name": "test_outputs.py::test_agent_interface_matches_independent_replay_on_checkpoints",
+                "status": "passed",
+                "duration": 0.13523323299887124,
+                "start": 1784294198.214589,
+                "stop": 1784294198.3500323,
+                "retries": 0,
+                "file_path": "test_outputs.py"
+            }
+        ]
+    }
+}
